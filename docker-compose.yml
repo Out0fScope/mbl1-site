@@ -1,0 +1,74 @@
+services:
+  web-site:
+    build:
+      context: ./frontend
+    image: mbl1
+    environment:
+      - PORT=${SITE_PORT}
+    ports:
+      - "2447:2447"
+    container_name: mbl1
+    networks:
+      - internal
+
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ./backend/db_data:/var/lib/postgresql/data
+      - ./backend/backups:/var/lib/postgresql/backups
+      - ./backend/initial:/docker-entrypoint-initdb.d/
+    networks:
+      - internal
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    volumes:
+      - ./backend/redis_data:/data
+    networks:
+      - internal
+
+  directus:
+    image: directus/directus:latest
+    restart: unless-stopped
+    ports:
+      - "8055:8055"
+    environment:
+      # KEY: ${DIRECTUS_KEY}
+      # SECRET: ${DIRECTUS_SECRET}
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
+
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "*"
+      CORS_METHODS: "GET,POST,PATCH,DELETE,OPTIONS"
+      CORS_HEADERS: "Content-Type,Authorization"
+
+      DB_CLIENT: "pg"
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+
+      CACHE_ENABLED: "true"
+      CACHE_STORE: "redis"
+      REDIS: "redis://redis:6379"
+
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./backend/uploads:/directus/uploads
+      - ./backend/extensions:/directus/extensions
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

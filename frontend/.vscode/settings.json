@@ -1,0 +1,49 @@
+{
+  // 1) Common settings
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.renderWhitespace": "all",
+  "editor.renderControlCharacters": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // 2) Prettier settings
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.semi": true,
+  "prettier.printWidth": 100,
+  "prettier.endOfLine": "lf",
+
+  // 3) ESLint settings
+  "eslint.enable": true,
+  "eslint.run": "onSave",
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+
+  // 4) Tailwind IntelliSense
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "html"
+  },
+  "tailwindCSS.experimental.classRegex": ["clsx\\(([^)]*)\\)", "cn\\(([^)]*)\\)"],
+
+  // 5) Excludes from search
+  "files.exclude": {
+    "**/.next": true,
+    "**/node_modules": true
+  },
+  "search.exclude": {
+    "**/.next": true,
+    "**/node_modules": true
+  },
+  "search.useIgnoreFiles": true,
+  "search.useParentIgnoreFiles": false,
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  }
+}
