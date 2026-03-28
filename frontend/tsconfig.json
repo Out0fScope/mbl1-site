@@ -25,6 +25,7 @@
       "_components/*": ["./src/components/*"],
       "_context/*": ["./src/context/*"],
       "_hooks/*": ["./src/hooks/*"],
+      "_Api": ["./src/lib/api/index"],
       "_helpers/*": ["./src/lib/helpers/*"],
       "_types/*": ["./src/types/*"]
     }

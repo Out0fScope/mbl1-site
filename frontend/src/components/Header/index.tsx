@@ -1,16 +1,18 @@
 // 'use client';
 
+import Api from '_Api';
 import CTAButton from '_components/Header/components/CTAButton';
 import InstagramIcon from '_icons/instagram.svg';
 import { Mail, Phone } from 'lucide-react';
 import Image from 'next/image';
-import Api from 'src/lib/api';
 import { Collection } from 'src/lib/api/types';
 import Logo from './components/Logo';
 import Navigation from './components/Navigation';
 
 const Header = async () => {
   const contacts = (await Api.getData(Collection.Contacts))[0];
+  const categories = await Api.getData(Collection.Categories);
+
   // const { scrollY } = useScroll();
 
   // const opacity = Math.min(scrollY / 160, 1);
@@ -19,7 +21,7 @@ const Header = async () => {
     <header className={`fixed top-0 left-0 w-full z-50 bg-background`}>
       <div className="max-w-8xl mx-auto flex items-center justify-between px-4 sm:px-8 lg:px-24 h-24">
         <Logo />
-        <Navigation />
+        <Navigation categories={categories} />
         <div className="flex items-end gap-4">
           <div id="socials" className="absolute flex gap-1 bottom-[1.25rem] right-[18rem]">
             <div className="group flex items-center overflow-hidden cursor-pointer">

@@ -5,13 +5,15 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { ICategory } from 'src/lib/api/types';
 import DropdownMenu from './DropdownMenu';
 
 interface NavItemProps {
   page: IPage;
+  categories: ICategory[];
 }
 
-const NavItem = ({ page }: NavItemProps) => {
+const NavItem = ({ page, categories }: NavItemProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const pathname = usePathname();
@@ -42,7 +44,7 @@ const NavItem = ({ page }: NavItemProps) => {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
             >
-              <DropdownMenu />
+              <DropdownMenu categories={categories} />
             </motion.div>
           )}
         </AnimatePresence>

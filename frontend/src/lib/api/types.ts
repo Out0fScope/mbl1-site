@@ -1,15 +1,21 @@
 enum Collection {
   Contacts = 'contacts',
+  Categories = 'categories',
 }
 
 interface ICollectionMap {
-  [Collection.Contacts]: IContacts[];
+  [Collection.Contacts]: IContact[];
+  [Collection.Categories]: ICategory[];
 }
 
-interface IContacts {
+interface IContact {
   email: string;
   phone1: string;
   phone2: string;
+}
+
+interface ICategory {
+  title: string;
 }
 
 interface IData {
@@ -18,4 +24,4 @@ interface IData {
 }
 
 export { Collection };
-export type { ICollectionMap, IContacts, IData };
+export type { ICategory, ICollectionMap, IContact, IData };
