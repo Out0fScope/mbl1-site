@@ -2,7 +2,7 @@
 
 const CTAButton = () => {
   return (
-    <a href="#" className="btn-7">
+    <a href="#" className="btn-7 max-lg:text-sm">
       <div className="arrow-layer">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="#0f2a3a">
           <rect x="4" y="2" width="16" height="20" rx="2" stroke="#ffffff" strokeWidth="2" />

@@ -1,3 +1,4 @@
+import Footer from '_components/Footer';
 import AppProvider from '_context/AppProvider';
 import type { Metadata } from 'next';
 import { Inter, Playfair_Display } from 'next/font/google';
@@ -37,9 +38,13 @@ export default function RootLayout({
           >
             Перейти к основному контенту
           </a>
-          <main id="main-content" className="mt-[8rem] mx-4 md:mx-6 lg:mx-12 xl:mx-32 2xl:mx-64">
+          <main
+            id="main-content"
+            className="mt-[8rem] mx-4 md:mx-6 lg:mx-12 xl:mx-32 2xl:mx-64 min-h-screen"
+          >
             {children}
           </main>
+          <Footer />
         </AppProvider>
       </body>
     </html>

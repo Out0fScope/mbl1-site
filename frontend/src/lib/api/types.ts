@@ -12,10 +12,12 @@ interface IContact {
   email: string;
   phone1: string;
   phone2: string;
+  address: string;
 }
 
 interface ICategory {
   title: string;
+  sub_categories: ICategory[] | null;
 }
 
 interface IData {

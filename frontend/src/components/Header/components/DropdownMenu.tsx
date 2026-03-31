@@ -22,6 +22,12 @@ const DropdownMenu = ({ categories }: IDropdownMenuProps) => {
           <p className="text-xl font-medium text-primary mb-2 hover:text-primary-hover cursor-pointer">
             {item.title}
           </p>
+
+          {item.sub_categories?.map((sub, index) => (
+            <a key={index} className="cursor-pointer hover:text-muted">
+              {sub.title}
+            </a>
+          ))}
         </div>
       ))}
       {/* КУХНИ */}
@@ -65,7 +71,6 @@ const DropdownMenu = ({ categories }: IDropdownMenuProps) => {
         <p className="text-xl font-medium text-primary mb-2 hover:text-primary-hover cursor-pointer">
           Под заказ
         </p>
-
         <a className="cursor-pointer hover:text-muted">Встроенная мебель</a>
         <a className="cursor-pointer hover:text-muted">По дизайн-проекту</a>
       </div> */}
