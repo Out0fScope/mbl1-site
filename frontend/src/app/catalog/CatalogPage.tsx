@@ -13,16 +13,13 @@ const CatalogPage = async ({ categories }: CatalogProps) => {
         <h1 className="text-3xl md:text-4xl font-bold mb-[1rem]">
           Каталог <span className="text-primary">MBL</span>
         </h1>
-        <p className="text-muted text-lg">
-          Примеры выполненных проектов: мебель на заказ, дизайн интерьера и индивидуальные решения.
+        <p className="text-muted text-lg py-[1rem]">
+          Мебель на заказ, дизайн интерьера и индивидуальные решения
         </p>
       </header>
 
       {/* Content */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center gap-12">
-        {categories.map((item, index) => (
-          <Card key={index} item={item} />
-        ))}
+      <div className="grid xs:grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-12">
         {categories.map((item, index) => (
           <Card key={index} item={item} />
         ))}

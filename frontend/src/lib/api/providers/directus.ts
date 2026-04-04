@@ -7,12 +7,18 @@ const directus = createDirectus(getApiURL().href)
 
 const getData = async (
   collection: string,
+  options: {
+    filter?: any;
+    sort?: string[];
+    limit?: number;
+  } = {},
   throwOnError = false
 ): Promise<Record<string, any>[]> => {
   try {
     const result = await directus.request(
       readItems(collection, {
         fields: ['*', '*.*'],
+        ...options,
       })
     );
 

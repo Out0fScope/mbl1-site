@@ -17,6 +17,8 @@ interface IContact {
 
 interface ICategory {
   title: string;
+  description: string;
+  image: { id: string };
   sub_categories: ICategory[] | null;
 }
 

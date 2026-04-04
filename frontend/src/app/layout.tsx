@@ -1,7 +1,7 @@
 import Footer from '_components/Footer';
 import AppProvider from '_context/AppProvider';
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display } from 'next/font/google';
+import { Inter, Manrope } from 'next/font/google';
 import Header from '../components/Header';
 import './globals.css';
 
@@ -11,9 +11,9 @@ const inter = Inter({
   display: 'swap',
 });
 
-const playfair = Playfair_Display({
+const manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
-  variable: '--font-serif',
+  variable: '--font-heading',
   display: 'swap',
 });
 
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="ru" className={`${inter.variable} ${manrope.variable}`}>
       <body className="antialiased">
         <AppProvider>
           <Header />
@@ -40,7 +40,7 @@ export default function RootLayout({
           </a>
           <main
             id="main-content"
-            className="mt-[8rem] mx-4 md:mx-6 lg:mx-12 xl:mx-32 2xl:mx-64 min-h-screen"
+            className="mt-[8rem] mx-4 md:mx-6 lg:mx-12 xl:mx-24 2xl:mx-32 min-h-screen"
           >
             {children}
           </main>

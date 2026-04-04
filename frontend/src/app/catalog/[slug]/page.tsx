@@ -1,6 +1,7 @@
 import Api from '_Api';
 import { slugify } from '_helpers/slugify-helper';
 import { Collection, ICategory } from 'src/lib/api/types';
+import SubCategoryPage from './SubCatalogPage';
 
 interface CatalogCategoryProps {
   params: { slug: string };
@@ -13,13 +14,7 @@ const CatalogCategoryPage = async (props: CatalogCategoryProps) => {
 
   if (!category) return <div>Категория не найдена</div>;
 
-  return (
-    <>
-      {category.sub_categories?.map((item, index) => (
-        <div key={index}>{item.title}</div>
-      ))}
-    </>
-  );
+  return <SubCategoryPage category={category} />;
 };
 
 export default CatalogCategoryPage;

@@ -62,17 +62,15 @@
   --font-serif: var(--font-serif);
 }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-serif);
+header {
+  font-family: var(--font-sans);
   color: var(--color-text-strong);
 }
 
 body {
   background: var(--color-bg);
   color: var(--color-text-primary);
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
 
   min-height: 100vh;
   margin: 0;
