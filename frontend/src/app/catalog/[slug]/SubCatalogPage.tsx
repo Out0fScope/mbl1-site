@@ -1,7 +1,6 @@
 'use client';
 
-import { slugify } from '_helpers/slugify-helper';
-import Link from 'next/link';
+import { useState } from 'react';
 import { ICategory } from 'src/lib/api/types';
 
 interface SubCategoryPageProps {
@@ -9,6 +8,23 @@ interface SubCategoryPageProps {
 }
 
 const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
+  const [subCategories, setSubCategories] = useState(
+    category.sub_categories?.map((item) => ({
+      ...item,
+      active: false,
+    }))
+  );
+
+  const toggleSubCategory = (index: number) => {
+    setSubCategories((prev) =>
+      prev?.map((item, i) => (i === index ? { ...item, active: !item.active } : item))
+    );
+  };
+
+  const projects = subCategories?.filter((x) => x.active).flatMap((item) => item.projects || []);
+
+  console.log(projects);
+
   return (
     <section className="container mx-auto px-4 py-10">
       {/* HEADER */}
@@ -20,16 +36,45 @@ const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
         </p>
       </header>
 
+      {/* SUBCATEGORIES */}
+      <div className="mb-12">
+        <h2 className="text-xl font-semibold mb-6">Категории</h2>
+
+        <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
+          {subCategories?.map((sub, index) => {
+            const count = sub.projects?.length ?? 0;
+
+            return (
+              <div
+                key={index}
+                className={`relative p-6 border transition-all duration-300 cursor-pointer
+                  ${count === 0 ? 'opacity-40 pointer-events-none' : 'hover:shadow-lg hover:-translate-y-1'}
+                  ${sub.active ? 'border-primary bg-primary-light text-card' : 'border-muted'}`}
+                onClick={() => toggleSubCategory(index)}
+              >
+                <div className="font-semibold text-lg mb-2">{sub.title}</div>
+
+                <div
+                  className={`text-sm transition-all duration-300  ${sub.active ? 'text-card' : 'text-muted'}`}
+                >
+                  {count} проектов
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         {/* COUNT */}
-        <div className="text-sm text-muted">Найдено: {category.sub_categories?.length ?? 0}</div>
+        <div className="text-sm text-muted">Найдено: {projects?.length}</div>
 
         {/* SORT */}
         <div className="flex items-center gap-3">
           <span className="text-sm text-muted">Сортировка:</span>
 
           <select
-            className="border rounded px-3 py-2 text-sm bg-white"
+            className="border px-3 py-2 text-sm bg-white"
             onChange={(e) => {
               // пока просто лог
               console.log('sort:', e.target.value);
@@ -41,32 +86,6 @@ const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
             <option value="cheap">Сначала дешевые</option>
             <option value="expensive">Сначала дорогие</option>
           </select>
-        </div>
-      </div>
-
-      {/* SUBCATEGORIES */}
-      <div className="mb-12">
-        <h2 className="text-xl font-semibold mb-6">Категории</h2>
-
-        <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
-          {category.sub_categories?.map((sub, index) => {
-            // const count = sub.itemsCount ?? 0;
-            const count = 1;
-
-            return (
-              <Link
-                key={index}
-                href={`/catalog/${slugify(category.title, { lower: true })}/${slugify(sub.title, { lower: true })}`}
-                className={`relative p-6 rounded-lg border transition-all duration-300
-                  ${true ? 'opacity-40 pointer-events-none' : 'hover:shadow-lg hover:-translate-y-1'}
-                `}
-              >
-                <div className="font-semibold text-lg mb-2">{sub.title}</div>
-
-                <div className="text-sm text-muted">{count} проектов</div>
-              </Link>
-            );
-          })}
         </div>
       </div>
 
@@ -108,16 +127,9 @@ const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
 
         {/* PRODUCTS */}
         <div>
-          <div className="mb-6 text-sm text-muted">
-            Найдено: {category.sub_categories?.length ?? 0}
-          </div>
-
           <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
-            {category.sub_categories?.map((item, index) => (
-              <div
-                key={index}
-                className="border rounded-lg overflow-hidden hover:shadow-lg transition"
-              >
+            {projects?.map((item, index) => (
+              <div key={index} className="border overflow-hidden hover:shadow-lg transition">
                 {/* IMAGE */}
                 <div className="h-48 bg-gray-200" />
 

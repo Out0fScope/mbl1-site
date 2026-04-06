@@ -19,7 +19,21 @@ interface ICategory {
   title: string;
   description: string;
   image: { id: string };
-  sub_categories: ICategory[] | null;
+  sub_categories: ISubCategory[] | null;
+}
+
+interface ISubCategory {
+  title: string;
+  projects: IProject[];
+  active: boolean;
+}
+
+interface IProject {
+  date_created: number;
+  description: string;
+  image: { id: string };
+  price: string;
+  title: string;
 }
 
 interface IData {
@@ -28,4 +42,4 @@ interface IData {
 }
 
 export { Collection };
-export type { ICategory, ICollectionMap, IContact, IData };
+export type { ICategory, ICollectionMap, IContact, IData, IProject, ISubCategory };

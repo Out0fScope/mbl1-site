@@ -17,7 +17,7 @@ const getData = async (
   try {
     const result = await directus.request(
       readItems(collection, {
-        fields: ['*', '*.*'],
+        fields: ['*', '*.*', '*.*.*'],
         ...options,
       })
     );
