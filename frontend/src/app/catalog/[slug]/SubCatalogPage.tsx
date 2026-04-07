@@ -8,6 +8,8 @@ interface SubCategoryPageProps {
 }
 
 const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
+  console.log(category);
+
   const [subCategories, setSubCategories] = useState(
     category.sub_categories?.map((item) => ({
       ...item,
@@ -17,13 +19,25 @@ const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
 
   const toggleSubCategory = (index: number) => {
     setSubCategories((prev) =>
-      prev?.map((item, i) => (i === index ? { ...item, active: !item.active } : item))
+      prev?.map((item, i) => ({
+        ...item,
+        active: i === index,
+      }))
     );
   };
 
-  const projects = subCategories?.filter((x) => x.active).flatMap((item) => item.projects || []);
+  const cleanSubCategories = () => {
+    setSubCategories((prev) =>
+      prev?.map((item) => ({
+        ...item,
+        active: false,
+      }))
+    );
+  };
 
-  console.log(projects);
+  const projects = subCategories?.find((x) => x.active === true)
+    ? subCategories?.filter((x) => x.active).flatMap((item) => item.projects || [])
+    : subCategories?.flatMap((item) => item.projects || []);
 
   return (
     <section className="container mx-auto px-4 py-10">
@@ -38,7 +52,15 @@ const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
 
       {/* SUBCATEGORIES */}
       <div className="mb-12">
-        <h2 className="text-xl font-semibold mb-6">Категории</h2>
+        <div className="flex justify-between">
+          <h2 className="text-xl font-semibold mb-6">Категории</h2>
+          <button
+            className="cursor-pointer underline hover:text-primary"
+            onClick={() => cleanSubCategories()}
+          >
+            Сбросить категории
+          </button>
+        </div>
 
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
           {subCategories?.map((sub, index) => {
@@ -57,7 +79,7 @@ const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
                 <div
                   className={`text-sm transition-all duration-300  ${sub.active ? 'text-card' : 'text-muted'}`}
                 >
-                  {count} проектов
+                  Проектов: {count}
                 </div>
               </div>
             );
@@ -95,8 +117,22 @@ const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
         <aside className="space-y-6">
           <h3 className="font-semibold text-lg">Фильтры</h3>
 
+          {category.groups_tag?.map((group, index) => (
+            <div key={index}>
+              <p className="text-xl mb-2 underline">{group.tag_groups_id.title}</p>
+              <div className="space-y-2">
+                {group.tag_groups_id.tags.map((tag, index) => (
+                  <label key={index} className="block">
+                    <input type="checkbox" className="mr-2" />
+                    {tag.title}
+                  </label>
+                ))}
+              </div>
+            </div>
+          ))}
+
           {/* пример фильтра */}
-          <div>
+          {/* <div>
             <p className="text-sm mb-2">Стиль</p>
             <div className="space-y-2">
               <label className="block">
@@ -122,7 +158,7 @@ const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
                 Тёмный
               </label>
             </div>
-          </div>
+          </div> */}
         </aside>
 
         {/* PRODUCTS */}

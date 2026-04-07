@@ -20,6 +20,7 @@ interface ICategory {
   description: string;
   image: { id: string };
   sub_categories: ISubCategory[] | null;
+  groups_tag: GroupsTag[] | null;
 }
 
 interface ISubCategory {
@@ -33,6 +34,17 @@ interface IProject {
   description: string;
   image: { id: string };
   price: string;
+  title: string;
+}
+
+interface GroupsTag {
+  tag_groups_id: {
+    title: string;
+    tags: ITag[];
+  };
+}
+
+interface ITag {
   title: string;
 }
 
