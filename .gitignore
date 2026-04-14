@@ -1,1 +1,57 @@
+<<<<<<< HEAD
 backend/
+=======
+# =========================
+# OS files
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Environment files
+# =========================
+
+.env
+.env.*
+*.local
+docker-compose*
+
+# =========================
+# Logs
+# =========================
+
+logs/
+*.log
+
+# =========================
+# Editors / IDE
+# =========================
+
+.vscode/*
+!.vscode/extensions.json
+
+.idea/
+
+*.swp
+*.swo
+
+# =========================
+# Visual Studio
+# =========================
+
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# =========================
+# Node debug logs
+# =========================
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+>>>>>>> 459dce6a007e9e96371dcdc9e043b7bdc8b15896
