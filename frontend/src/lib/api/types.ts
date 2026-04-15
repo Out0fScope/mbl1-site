@@ -1,11 +1,13 @@
 enum Collection {
   Contacts = 'contacts',
   Categories = 'categories',
+  Orders = 'orders',
 }
 
 interface ICollectionMap {
   [Collection.Contacts]: IContact[];
   [Collection.Categories]: ICategory[];
+  [Collection.Orders]: IOrder[];
 }
 
 interface IContact {
@@ -37,6 +39,13 @@ interface IProject {
   title: string;
 }
 
+interface IOrder {
+  name: string;
+  phone: string;
+  email: string;
+  description: string;
+}
+
 interface GroupsTag {
   tag_groups_id: {
     title: string;
@@ -54,4 +63,4 @@ interface IData {
 }
 
 export { Collection };
-export type { ICategory, ICollectionMap, IContact, IData, IProject, ISubCategory };
+export type { ICategory, ICollectionMap, IContact, IData, IOrder, IProject, ISubCategory };

@@ -55,13 +55,26 @@ const CleintHeader = ({ contacts, categories }: HeaderProps) => {
                 group-hover:ml-2
               "
               >
-                <span>{contacts.phone1}</span>
-                <span>{contacts.phone2}</span>
+                <a
+                  href={`tel:${contacts.phone1}`}
+                  rel="noopener noreferrer"
+                  className="text-muted hover:text-primary transition-colors duration-300"
+                >
+                  {contacts.phone1}
+                </a>
+                <a
+                  href={`tel:${contacts.phone1}`}
+                  rel="noopener noreferrer"
+                  className="text-muted hover:text-primary transition-colors duration-300"
+                >
+                  {contacts.phone2}
+                </a>
               </span>
             </div>
             <div className="group flex items-center overflow-hidden cursor-pointer">
               <Mail size={36} strokeWidth={1} className="transition-transform duration-300" />
-              <span
+              <a
+                href={`mailto:${contacts.email}`}
                 className="
                           max-w-0
                           opacity-0
@@ -72,10 +85,11 @@ const CleintHeader = ({ contacts, categories }: HeaderProps) => {
                           group-hover:max-w-[200px]
                           group-hover:opacity-100
                           group-hover:ml-2
+                          hover:text-primary
                         "
               >
                 {contacts.email}
-              </span>
+              </a>
             </div>
             <div className="group flex items-center overflow-hidden cursor-pointer">
               <Image
@@ -97,7 +111,14 @@ const CleintHeader = ({ contacts, categories }: HeaderProps) => {
                           group-hover:ml-2
                         "
               >
-                @mbl_1_mebel
+                <a
+                  href="https://instagram.com/mbl_1_mebel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors duration-300"
+                >
+                  @mbl_1_mebel
+                </a>
               </span>
             </div>
           </div>

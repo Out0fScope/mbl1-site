@@ -1,5 +1,7 @@
 'use client';
 
+import Api from '_api/index';
+import { Collection } from '_api/types';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import UploadZone from './UploadZone';
@@ -36,6 +38,16 @@ const OrderForm = ({ onClose }: Props) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const sendData = async () => {
+      await Api.postData(Collection.Orders, payload);
+    };
+
+    const payload: Array<any> = [];
+    payload.push(form);
+
+    sendData();
+    setForm({ name: '', phone: '', email: '', description: '', needVisit: false });
 
     console.log('FORM DATA:', form);
     console.log('FILE:', file);

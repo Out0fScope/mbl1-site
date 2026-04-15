@@ -1,9 +1,11 @@
+import Api from '_Api';
+import { Collection } from 'src/lib/api/types';
+import ContactsPage from './ContactsPage';
+
 const Contacts = async () => {
-  return (
-    <div className="cursor-default scroll-mt-64">
-      <h1>Contacts</h1>
-    </div>
-  );
+  const contacts = (await Api.getData(Collection.Contacts))[0];
+
+  return <ContactsPage contacts={contacts} />;
 };
 
 export default Contacts;

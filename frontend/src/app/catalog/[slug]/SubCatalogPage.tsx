@@ -1,19 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { slugify } from '_helpers/slugify-helper';
+import { useEffect, useState } from 'react';
 import { ICategory } from 'src/lib/api/types';
 
 interface SubCategoryPageProps {
   category: ICategory;
+  subCategory: string;
 }
 
-const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
+const url = process.env.NEXT_PUBLIC_CLIENT_API_URL;
+
+const SubCategoryPage = ({ category, subCategory }: SubCategoryPageProps) => {
   console.log(category);
+  console.log(subCategory);
 
   const [subCategories, setSubCategories] = useState(
     category.sub_categories?.map((item) => ({
       ...item,
-      active: false,
+      active: slugify(item.title, { lower: true }) === subCategory ? true : false,
     }))
   );
 
@@ -39,10 +44,23 @@ const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
     ? subCategories?.filter((x) => x.active).flatMap((item) => item.projects || [])
     : subCategories?.flatMap((item) => item.projects || []);
 
+  useEffect(() => {
+    const func = async () => {
+      setSubCategories((prev) =>
+        prev?.map((item) => ({
+          ...item,
+          active: slugify(item.title, { lower: true }) === subCategory ? true : false,
+        }))
+      );
+    };
+
+    func();
+  }, [subCategory]);
+
   return (
-    <section className="container mx-auto px-4 py-10">
+    <section className="cursor-default scroll-mt-64">
       {/* HEADER */}
-      <header className="mb-10">
+      <header className="py-[1rem] md:py-[2rem]">
         <h1 className="text-3xl md:text-4xl font-bold mb-4">{category.title}</h1>
         <p className="text-muted max-w-2xl">
           Подберите идеальное решение под ваш интерьер. Все проекты можно адаптировать под ваши
@@ -167,7 +185,16 @@ const SubCategoryPage = ({ category }: SubCategoryPageProps) => {
             {projects?.map((item, index) => (
               <div key={index} className="border overflow-hidden hover:shadow-lg transition">
                 {/* IMAGE */}
-                <div className="h-48 bg-gray-200" />
+                {item.image !== null ? (
+                  <div
+                    className="h-48 bg-cover bg-center bg-no-repeat"
+                    style={{
+                      backgroundImage: `url(${url}/assets/${item.image.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7)`,
+                    }}
+                  />
+                ) : (
+                  <div className="h-48 bg-gray-200" />
+                )}
 
                 {/* CONTENT */}
                 <div className="p-4">

@@ -9,8 +9,8 @@ const CatalogPage = async ({ categories }: CatalogProps) => {
   return (
     <section id="catalog" className="cursor-default scroll-mt-64">
       {/* Header */}
-      <header className="text-center py-[1rem] md:py-[2rem]">
-        <h1 className="text-3xl md:text-4xl font-bold mb-[1rem]">
+      <header className="py-[1rem] md:py-[2rem]">
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">
           Каталог <span className="text-primary">MBL</span>
         </h1>
         <p className="text-muted text-lg py-[1rem]">

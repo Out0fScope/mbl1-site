@@ -40,7 +40,7 @@ export default function RootLayout({
           </a>
           <main
             id="main-content"
-            className="mt-[8rem] mx-4 md:mx-6 lg:mx-12 xl:mx-24 2xl:mx-32 min-h-screen"
+            className="mt-[4rem] mx-4 md:mx-6 lg:mx-12 xl:mx-24 2xl:mx-32 min-h-screen"
           >
             {children}
           </main>
