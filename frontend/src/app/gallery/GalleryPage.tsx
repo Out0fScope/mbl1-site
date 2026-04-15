@@ -5,7 +5,7 @@ interface CatalogProps {
   categories: ICategory[];
 }
 
-const CatalogPage = async ({ categories }: CatalogProps) => {
+const GalleryPage = async ({ categories }: CatalogProps) => {
   return (
     <section id="catalog" className="cursor-default scroll-mt-64">
       {/* Header */}
@@ -28,4 +28,4 @@ const CatalogPage = async ({ categories }: CatalogProps) => {
   );
 };
 
-export default CatalogPage;
+export default GalleryPage;

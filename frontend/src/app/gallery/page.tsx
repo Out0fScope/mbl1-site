@@ -1,9 +1,11 @@
+import Api from '_Api';
+import { Collection } from 'src/lib/api/types';
+import CatalogPage from './GalleryPage';
+
 const Gallery = async () => {
-  return (
-    <div className="cursor-default scroll-mt-64">
-      <h1>Gallery</h1>
-    </div>
-  );
+  const categories = await Api.getData(Collection.Categories);
+
+  return <CatalogPage categories={categories} />;
 };
 
 export default Gallery;

@@ -20,7 +20,7 @@ const NavItem = ({ page, categories }: NavItemProps) => {
 
   return (
     <div
-      className="relative h-full flex items-center"
+      className="relative flex items-center"
       onMouseLeave={() => page.isDropdown && setMenuOpen(false)}
     >
       <Link

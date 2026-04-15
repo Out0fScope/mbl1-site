@@ -1,9 +1,11 @@
 enum Pages {
   home = '/',
-  catalog = 'catalog',
   gallery = 'gallery',
+  installmentCredit = 'installmentCredit',
   about = 'about',
   contacts = 'contacts',
+  reviews = 'reviews',
+  howOrder = 'howOrder',
 }
 
 interface IPage {
@@ -19,14 +21,13 @@ const Nav = {
     link: '/',
     hidden: true,
   },
-  [Pages.catalog]: {
-    name: 'Каталог',
-    link: '/catalog',
-    isDropdown: true,
-  },
   [Pages.gallery]: {
     name: 'Галерея',
     link: '/gallery',
+  },
+  [Pages.installmentCredit]: {
+    name: 'Рассрочка и кредит',
+    link: '/installment-credit',
   },
   [Pages.about]: {
     name: 'О нас',
@@ -35,6 +36,14 @@ const Nav = {
   [Pages.contacts]: {
     name: 'Контакты',
     link: '/contacts',
+  },
+  [Pages.reviews]: {
+    name: 'Отзывы',
+    link: '/reviews',
+  },
+  [Pages.howOrder]: {
+    name: 'Как заказать',
+    link: '/how-order',
   },
 } as const;
 

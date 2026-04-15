@@ -187,7 +187,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: color-mix(in oklab, var(--color-muted) 45%, white);
 }
 
 ::-webkit-scrollbar-thumb {
