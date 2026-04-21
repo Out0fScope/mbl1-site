@@ -31,7 +31,7 @@ const Breadcrumbs = () => {
         }}
       /> */}
 
-      <nav aria-label="Breadcrumb" className="text-sm mt-32 mx-16">
+      <nav aria-label="Breadcrumb" className="text-sm mt-32">
         <ol className="flex flex-wrap items-center gap-2 text-muted">
           {breadcrumbs.map((crumb, index) => {
             const isLast = index === breadcrumbs.length - 1;

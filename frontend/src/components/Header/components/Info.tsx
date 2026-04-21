@@ -7,7 +7,7 @@ interface Props {
 
 const Info = ({ contacts }: Props) => {
   return (
-    <div className="flex flex-col justify-between py-4">
+    <div className="flex flex-col justify-between py-2">
       <div className="flex items-end gap-2">
         <MapPin strokeWidth={1} />
         <span className="text-sm">{contacts.address}</span>

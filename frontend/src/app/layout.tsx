@@ -1,5 +1,6 @@
 import Footer from '_components/Footer';
 import AppProvider from '_context/AppProvider';
+import { BreadcrumbsProvider } from '_context/BreadcrumbsProvider';
 import type { Metadata } from 'next';
 import { Inter, Manrope } from 'next/font/google';
 import Header from '../components/Header';
@@ -40,9 +41,9 @@ export default function RootLayout({
           </a>
           <main
             id="main-content"
-            className="mt-[4rem] mx-4 md:mx-6 lg:mx-12 xl:mx-24 2xl:mx-32 min-h-screen"
+            className="mt-28 mx-4 md:mx-6 lg:mx-12 xl:mx-24 2xl:mx-32 min-h-screen"
           >
-            {children}
+            <BreadcrumbsProvider>{children}</BreadcrumbsProvider>
           </main>
           <Footer />
         </AppProvider>
