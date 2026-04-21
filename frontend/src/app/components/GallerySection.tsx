@@ -1,5 +1,5 @@
 import { ICategory } from 'src/lib/api/types';
-import Card from './components/Card';
+import Card from './Card';
 
 interface CatalogProps {
   categories: ICategory[];
