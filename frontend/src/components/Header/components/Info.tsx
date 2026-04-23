@@ -7,14 +7,14 @@ interface Props {
 
 const Info = ({ contacts }: Props) => {
   return (
-    <div className="flex flex-col justify-between py-2">
+    <div className="hidden md:flex flex-col justify-between py-2">
       <div className="flex items-end gap-2">
         <MapPin strokeWidth={1} />
-        <span className="text-sm">{contacts.address}</span>
+        <span className="text-sm max-lg:text-xs">{contacts.address}</span>
       </div>
       <div className="flex items-end gap-2">
         <Clock4 strokeWidth={1} />
-        <span className="text-sm"> с 09:00 до 18:00 Вых.: сб-вс</span>
+        <span className="text-sm max-lg:text-xs"> с 09:00 до 18:00 Вых.: сб-вс</span>
       </div>
       <div className="flex items-center gap-2">
         <Phone strokeWidth={1} />
@@ -22,14 +22,14 @@ const Info = ({ contacts }: Props) => {
           <a
             href={`tel:${contacts.phone1}`}
             rel="noopener noreferrer"
-            className="hover:text-primary text-sm transition-colors duration-300"
+            className="hover:text-primary text-sm max-lg:text-xs transition-colors duration-300"
           >
             {contacts.phone1}
           </a>
           <a
             href={`tel:${contacts.phone1}`}
             rel="noopener noreferrer"
-            className="hover:text-primary text-sm transition-colors duration-300"
+            className="hover:text-primary text-sm max-lg:text-xs transition-colors duration-300"
           >
             {contacts.phone2}
           </a>

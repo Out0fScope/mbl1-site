@@ -39,10 +39,7 @@ export default function RootLayout({
           >
             Перейти к основному контенту
           </a>
-          <main
-            id="main-content"
-            className="mt-46 mx-4 md:mx-6 lg:mx-12 xl:mx-24 2xl:mx-32 min-h-screen"
-          >
+          <main id="main-content" className="min-h-screen">
             <BreadcrumbsProvider>{children}</BreadcrumbsProvider>
           </main>
           <Footer />

@@ -9,7 +9,7 @@ interface CardProps {
 }
 
 const Card = ({ item }: CardProps) => {
-  const qwe = `${url}/assets/${item.image.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7`;
+  const qwe = `${url}/assets/${item.image?.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7`;
   console.log(qwe);
 
   return (
@@ -18,12 +18,12 @@ const Card = ({ item }: CardProps) => {
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
         style={{
-          backgroundImage: `url(${url}/assets/${item.image.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7)`,
+          backgroundImage: `url(${url}/assets/${item.image?.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7)`,
         }}
       />
 
       {/* DARK OVERLAY */}
-      <div className="absolute inset-0 bg-black/60 transition-all duration-500 group-hover:bg-black/20" />
+      <div className="absolute inset-0 bg-black/50 transition-all duration-500 group-hover:bg-black/20" />
 
       {/* CONTENT */}
       <div className="relative z-10 px-6 py-4 group-hover:opacity-0 transition-all duration-500">

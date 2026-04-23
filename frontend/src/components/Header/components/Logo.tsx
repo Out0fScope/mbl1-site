@@ -6,7 +6,10 @@ const IMAGE_ALT = 'Главная Mbl1';
 
 const Logo = () => {
   return (
-    <Link href="/" className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <Link
+      href="/"
+      className="md:absolute md:top-1/3 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2"
+    >
       <Image src={Icon} alt={IMAGE_ALT} priority className="h-12 w-auto object-contain" />
     </Link>
   );

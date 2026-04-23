@@ -73,7 +73,6 @@ header {
 }
 
 body {
-  /* background-image: url('/background.jpg'); Reference from the public folder */
   background-attachment: fixed; /* Key property to keep the image fixed */
   background-position: center; /* Centers the image */
   background-repeat: no-repeat; /* Prevents tiling */
@@ -89,6 +88,7 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  cursor: default;
 
   overflow-y: auto;
 }

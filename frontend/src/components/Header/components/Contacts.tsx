@@ -12,7 +12,7 @@ const Contacts = ({ contacts }: Props) => {
   return (
     <div className="hidden md:flex h-full">
       <div id="socials" className="flex flex-col justify-between py-2">
-        <div className="flex flex-col mb-2">
+        <div className="flex flex-col mb-2 max-lg:text-sm">
           <div className="flex gap-2">
             <Mail strokeWidth={1} />
             <a
