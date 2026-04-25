@@ -1,4 +1,4 @@
-import { getData, postData } from './providers/directus';
+import { getData, postData, uploadFile } from './providers/directus';
 import { ICollectionMap, IData } from './types';
 
 const Api: IData = {
@@ -8,6 +8,10 @@ const Api: IData = {
 
   async postData(dataType, data) {
     await postData(dataType, data);
+  },
+
+  async uploadFile(file) {
+    return await uploadFile(file);
   },
 };
 

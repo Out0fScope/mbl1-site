@@ -44,6 +44,8 @@ interface IOrder {
   phone: string;
   email: string;
   description: string;
+  image: any | null;
+  designer: boolean;
 }
 
 interface GroupsTag {
@@ -60,6 +62,7 @@ interface ITag {
 interface IData {
   getData<K extends Collection>(key: K): Promise<ICollectionMap[K]>;
   postData<K extends Collection>(key: K, value: ICollectionMap[K]): Promise<void>;
+  uploadFile(file: File): Promise<any | null>;
 }
 
 export { Collection };

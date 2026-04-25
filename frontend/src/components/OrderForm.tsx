@@ -16,7 +16,8 @@ const OrderForm = ({ onClose }: Props) => {
     phone: '',
     email: '',
     description: '',
-    needVisit: false,
+    image: null,
+    designer: false,
   });
 
   const [file, setFile] = useState<File | null>(null);
@@ -36,26 +37,43 @@ const OrderForm = ({ onClose }: Props) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const sendData = async () => {
-      await Api.postData(Collection.Orders, payload);
-    };
+    let imageResult = null;
 
-    const payload: Array<any> = [];
-    payload.push(form);
+    // 1. upload
+    if (file) {
+      imageResult = await Api.uploadFile(file);
+      console.log('UPLOAD RESULT:', imageResult);
+    }
 
-    sendData();
-    setForm({ name: '', phone: '', email: '', description: '', needVisit: false });
+    // 2. формируем payload ЗДЕСЬ
+    const payload = [
+      {
+        ...form,
+        image: imageResult,
+      },
+    ];
 
-    console.log('FORM DATA:', form);
-    console.log('FILE:', file);
+    console.log('FINAL PAYLOAD:', payload);
 
-    // сюда потом API (Directus или backend)
+    // 3. отправляем
+    await Api.postData(Collection.Orders, payload);
+
+    // 4. очищаем
+    setForm({
+      name: '',
+      phone: '',
+      email: '',
+      description: '',
+      image: null,
+      designer: false,
+    });
+
+    setFile(null);
     onClose();
   };
-
   return (
     <div
       className="bg-white w-full max-w-lg p-6 relative"
@@ -118,12 +136,7 @@ const OrderForm = ({ onClose }: Props) => {
 
         {/* Чекбокс */}
         <label className="flex items-center gap-2 text-sm">
-          <input
-            type="checkbox"
-            name="needVisit"
-            checked={form.needVisit}
-            onChange={handleChange}
-          />
+          <input type="checkbox" name="designer" checked={form.designer} onChange={handleChange} />
           Нужен выезд замерщика / дизайнера
         </label>
 

@@ -9,7 +9,7 @@ interface NavigationProps {
 const Navigation = ({ categories }: NavigationProps) => {
   const pages = NavigationHelper.getPages().filter((page) => !page.hidden);
   return (
-    <nav className="hidden lg:flex items-center max-xl:text-sm gap-2">
+    <nav className="hidden md:flex items-center max-xl:text-sm lg:gap-2">
       {pages.map((item, index) => (
         <NavItem key={index} page={item} categories={categories} />
       ))}
