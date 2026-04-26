@@ -39,7 +39,7 @@ export default function RootLayout({
           >
             Перейти к основному контенту
           </a>
-          <main id="main-content" className="min-h-screen">
+          <main id="main-content" className="min-h-screen mt-16 md:mt-24 lg:mt-16">
             <BreadcrumbsProvider>{children}</BreadcrumbsProvider>
           </main>
           <Footer />

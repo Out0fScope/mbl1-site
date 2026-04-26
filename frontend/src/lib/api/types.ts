@@ -21,8 +21,6 @@ interface ICategory {
   title: string;
   description: string;
   image: { id: string };
-  sub_categories: ISubCategory[] | null;
-  groups_tag: GroupsTag[] | null;
 }
 
 interface ISubCategory {

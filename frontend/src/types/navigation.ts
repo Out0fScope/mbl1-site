@@ -1,10 +1,7 @@
 enum Pages {
   home = '/',
-  gallery = 'gallery',
   installmentCredit = 'installmentCredit',
-  about = 'about',
   contacts = 'contacts',
-  reviews = 'reviews',
   howOrder = 'howOrder',
 }
 
@@ -15,31 +12,32 @@ interface IPage {
   isDropdown?: boolean;
 }
 
+enum HomeSections {
+  gallery = 'gallery',
+  about = 'about',
+  reviews = 'reviews',
+}
+
+const HomeSectionsNav = {
+  [HomeSections.gallery]: { label: 'Галерея' },
+  [HomeSections.about]: { label: 'О нас' },
+  [HomeSections.reviews]: { label: 'Отзывы' },
+} as const;
+
 const Nav = {
   [Pages.home]: {
     name: 'Главная',
     link: '/',
     hidden: true,
-  },
-  [Pages.gallery]: {
-    name: 'Галерея',
-    link: '/gallery',
+    sections: HomeSectionsNav,
   },
   [Pages.installmentCredit]: {
     name: 'Рассрочка и кредит',
     link: '/installment-credit',
   },
-  [Pages.about]: {
-    name: 'О нас',
-    link: '/about',
-  },
   [Pages.contacts]: {
     name: 'Контакты',
     link: '/contacts',
-  },
-  [Pages.reviews]: {
-    name: 'Отзывы',
-    link: '/reviews',
   },
   [Pages.howOrder]: {
     name: 'Как заказать',
@@ -47,13 +45,23 @@ const Nav = {
   },
 } as const;
 
+interface ISectionItem {
+  id: string;
+  label: string;
+}
+
 type NavigationMap = typeof Nav;
+
+type PageWithSections = {
+  [K in Pages]: NavigationMap[K] extends { sections: any } ? K : never;
+}[Pages];
 
 interface INavigation {
   getPages(): IPage[];
   getLink<K extends Pages>(page: K): NavigationMap[K]['link'];
   getName<K extends Pages>(page: K): NavigationMap[K]['name'];
+  getSections<K extends PageWithSections>(page: K): ISectionItem[];
 }
 
-export { Nav, Pages };
+export { HomeSections, Nav, Pages };
 export type { INavigation, IPage };

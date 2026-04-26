@@ -2,6 +2,7 @@
 
 import OrderForm from '_components/OrderForm';
 import useModal from '_hooks/useModal';
+import { HomeSections, Pages } from '_types/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -9,13 +10,16 @@ const HeroSection = () => {
   const { openModal, closeModal } = useModal();
 
   return (
-    <section className="relative h-screen w-full overflow-hidden mb-16 scroll-mt-64">
+    <section
+      id={Pages.home}
+      className="relative h-screen w-full overflow-hidden mb-16 scroll-mt-64"
+    >
       {/* Background */}
       <div className="absolute inset-0">
         <Image src="/hero.png" alt="Мебельный интерьер" fill priority className="object-cover" />
 
         {/* overlay */}
-        <div className="absolute inset-0 bg-white/10" />
+        {/* <div className="absolute inset-0 bg-white/10" /> */}
 
         {/* bottom gradient */}
         <div className="absolute inset-x-0 bottom-0 h-32 md:h-40 bg-gradient-to-b from-transparent to-white" />
@@ -49,7 +53,7 @@ const HeroSection = () => {
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Link
-              href="#catalog"
+              href={`#${HomeSections.gallery}`}
               className="w-full sm:w-auto text-center bg-white text-black px-5 py-3 hover:bg-neutral-200 transition"
             >
               Галерея работ

@@ -5,18 +5,16 @@ import SubCategoryPage from './SubCatalogPage';
 
 interface CatalogCategoryProps {
   params: { slug: string };
-  searchParams: { subCategory?: string };
 }
 
 const CatalogCategoryPage = async (props: CatalogCategoryProps) => {
   const categories: ICategory[] = await Api.getData(Collection.Categories);
   const params = await props.params;
-  const searchParams = await props.searchParams;
   const category = categories.find((t) => slugify(t.title, { lower: true }) === params.slug);
 
   if (!category) return <div>Категория не найдена</div>;
 
-  return <SubCategoryPage category={category} subCategory={searchParams.subCategory ?? 'wrong'} />;
+  return <SubCategoryPage category={category} />;
 };
 
 export default CatalogCategoryPage;

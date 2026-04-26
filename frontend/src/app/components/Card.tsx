@@ -1,4 +1,5 @@
 import { slugify } from '_helpers/slugify-helper';
+import { HomeSections } from '_types/navigation';
 import Link from 'next/link';
 import { ICategory } from 'src/lib/api/types';
 
@@ -9,9 +10,6 @@ interface CardProps {
 }
 
 const Card = ({ item }: CardProps) => {
-  const qwe = `${url}/assets/${item.image?.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7`;
-  console.log(qwe);
-
   return (
     <div className="group relative flex flex-col justify-between overflow-hidden shadow-lg min-h-[18rem] h-full text-white">
       {/* BACKGROUND */}
@@ -34,7 +32,7 @@ const Card = ({ item }: CardProps) => {
       {/* BUTTON */}
       <div className="relative z-10 flex justify-end p-4">
         <Link
-          href={`/catalog/${slugify(item.title, { lower: true })}`}
+          href={`/${slugify(item.title, { lower: true })}`}
           className="relative block px-4 py-2 text-center
                      border border-card text-card
                      overflow-hidden transition-all duration-300"

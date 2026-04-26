@@ -1,5 +1,6 @@
+import { HomeSections } from '_types/navigation';
 import { ICategory } from 'src/lib/api/types';
-import Card from './Card';
+import Card from '../components/Card';
 
 interface CatalogProps {
   categories: ICategory[];
@@ -7,7 +8,10 @@ interface CatalogProps {
 
 const GallerySection = async ({ categories }: CatalogProps) => {
   return (
-    <section id="catalog" className="cursor-default scroll-mt-64 px-4 sm:px-12 lg:px-16 xl:px-24">
+    <section
+      id={HomeSections.gallery}
+      className="cursor-default scroll-mt-48 px-4 sm:px-12 lg:px-16 xl:px-24"
+    >
       {/* Header */}
       <header className="py-2md:py-4">
         <h2 className="text-lg uppercase tracking-widest text-foreground">Галерея</h2>
