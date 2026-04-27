@@ -24,15 +24,15 @@ const NavItem = ({ page, categories }: NavItemProps) => {
       onMouseLeave={() => page.isDropdown && setMenuOpen(false)}
     >
       <Link
-        href={page.href}
+        href={page.link}
         className={`btn-12 text-md font-medium z-10 ${
-          pathname === page.href || (page.href !== '/' && pathname.startsWith(page.href + '/'))
+          pathname === page.link || (page.link !== '/' && pathname.startsWith(page.link + '/'))
             ? 'active'
             : ''
         }`}
         onMouseEnter={() => page.isDropdown && setMenuOpen(true)}
       >
-        {page.label}
+        {page.name}
       </Link>
       {page.isDropdown && (
         <AnimatePresence>

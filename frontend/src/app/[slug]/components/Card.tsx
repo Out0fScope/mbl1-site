@@ -1,21 +1,23 @@
-import { slugify } from '_helpers/slugify-helper';
-import Link from 'next/link';
-import { ICategory } from 'src/lib/api/types';
+import ProjectModal from '_components/ProjectModal';
+import useModal from '_hooks/useModal';
+import { IProject } from 'src/lib/api/types';
 
 const url = process.env.NEXT_PUBLIC_CLIENT_API_URL;
 
 interface CardProps {
-  item: ICategory;
+  item: IProject;
 }
 
 const Card = ({ item }: CardProps) => {
+  const { openModal, closeModal } = useModal();
+
   return (
     <div className="group relative flex flex-col justify-between overflow-hidden shadow-lg min-h-[18rem] h-full text-white">
       {/* BACKGROUND */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
         style={{
-          backgroundImage: `url(${url}/assets/${item.image?.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7)`,
+          backgroundImage: `url(${url}/assets/${item.images[0]?.directus_files_id.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7)`,
         }}
       />
 
@@ -30,17 +32,17 @@ const Card = ({ item }: CardProps) => {
 
       {/* BUTTON */}
       <div className="relative z-10 flex justify-end p-4">
-        <Link
-          href={`/${slugify(item.title, { lower: true })}`}
+        <button
           className="relative block px-4 py-2 text-center
                      border border-card text-card
-                     overflow-hidden transition-all duration-300"
+                     overflow-hidden transition-all duration-300 cursor-pointer"
+          onClick={() => openModal(ProjectModal, { project: item, onClose: closeModal })}
         >
           <span className="relative z-10">Подробнее</span>
 
           {/* hover fill */}
           <span className="absolute inset-0 w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>
-        </Link>
+        </button>
       </div>
     </div>
   );

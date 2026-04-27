@@ -10,7 +10,7 @@ const GallerySection = async ({ categories }: CatalogProps) => {
   return (
     <section
       id={HomeSections.gallery}
-      className="cursor-default scroll-mt-48 px-4 sm:px-12 lg:px-16 xl:px-24"
+      className="cursor-default scroll-mt-32 px-4 sm:px-12 lg:px-16 xl:px-24"
     >
       {/* Header */}
       <header className="py-2md:py-4">

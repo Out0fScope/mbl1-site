@@ -81,10 +81,17 @@ const OrderForm = ({ onClose }: Props) => {
     >
       {/* ❌ кнопка закрытия */}
       <button
-        className="absolute top-3 right-3 text-xl cursor-pointer hover:bg-muted/30"
         onClick={onClose}
+        className="
+          absolute top-4 right-4 z-20
+          p-2 rounded-full
+          bg-black/50 text-white
+          backdrop-blur
+          hover:bg-black/70 hover:scale-110
+          transition-all duration-200 cursor-pointer
+        "
       >
-        <X />
+        <X size={20} />
       </button>
 
       <h2 className="text-xl mb-4 font-semibold">Оставьте заявку</h2>

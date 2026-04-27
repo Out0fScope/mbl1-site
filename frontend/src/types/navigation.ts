@@ -6,8 +6,8 @@ enum Pages {
 }
 
 interface IPage {
-  href: string;
-  label: string;
+  link: string;
+  name: string;
   hidden?: boolean;
   isDropdown?: boolean;
 }

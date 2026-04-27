@@ -21,20 +21,13 @@ interface ICategory {
   title: string;
   description: string;
   image: { id: string };
-}
-
-interface ISubCategory {
-  title: string;
   projects: IProject[];
-  active: boolean;
 }
 
 interface IProject {
-  date_created: number;
-  description: string;
-  image: { id: string };
-  price: string;
   title: string;
+  description: string;
+  images: { directus_files_id: { id: string } }[];
 }
 
 interface IOrder {
@@ -46,17 +39,6 @@ interface IOrder {
   designer: boolean;
 }
 
-interface GroupsTag {
-  tag_groups_id: {
-    title: string;
-    tags: ITag[];
-  };
-}
-
-interface ITag {
-  title: string;
-}
-
 interface IData {
   getData<K extends Collection>(key: K): Promise<ICollectionMap[K]>;
   postData<K extends Collection>(key: K, value: ICollectionMap[K]): Promise<void>;
@@ -64,4 +46,4 @@ interface IData {
 }
 
 export { Collection };
-export type { ICategory, ICollectionMap, IContact, IData, IOrder, IProject, ISubCategory };
+export type { ICategory, ICollectionMap, IContact, IData, IOrder, IProject };

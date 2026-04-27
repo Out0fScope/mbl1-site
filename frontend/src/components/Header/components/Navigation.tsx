@@ -11,8 +11,8 @@ const Navigation = ({ categories }: NavigationProps) => {
   const pages = NavigationHelper.getPages().filter((page) => !page.hidden);
   const homeSections = NavigationHelper.getSections(Pages.home).map((section) => {
     return {
-      href: Pages.home + '#' + section.id,
-      label: section.label,
+      link: Pages.home + '#' + section.id,
+      name: section.label,
       hidden: false,
       isDropdown: false,
     };

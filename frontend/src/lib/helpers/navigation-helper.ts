@@ -12,8 +12,8 @@ const Navigation: INavigation = {
       };
 
       return {
-        href: pageData.link,
-        label: pageData.name,
+        link: pageData.link,
+        name: pageData.name,
         hidden: pageData.hidden ?? false,
         isDropdown: pageData.isDropdown ?? false,
       };
