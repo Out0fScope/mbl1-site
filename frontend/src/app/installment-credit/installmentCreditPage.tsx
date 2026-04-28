@@ -1,108 +1,179 @@
 'use client';
 
+import { Banknote, CheckCircle, Clock, CreditCard, Percent, Smartphone } from 'lucide-react';
 import Link from 'next/link';
 
 const InstallmentCreditPage = () => {
   return (
-    <main className="bg-background text-foreground">
-      {/* Hero */}
-      <section className="px-4 md:px-16 py-16 md:py-24 max-w-6xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-semibold mb-6">Рассрочка и кредит на мебель</h1>
-
-        <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mb-8">
-          Закажите мебель уже сегодня и оплачивайте постепенно. Без переплат и скрытых условий.
+    <section className="mb-16 scroll-mt-64 px-4 sm:px-12 lg:px-16 xl:px-24">
+      {/* HEADER */}
+      <header className="py-[1rem] md:py-[2rem]">
+        <h1 className="text-4xl font-bold mb-4">Рассрочка и кредит</h1>
+        <p className="text-lg text-gray-600">
+          Оформите мебель сейчас — платите позже на удобных условиях
         </p>
+      </header>
 
-        <div className="flex flex-col sm:flex-row gap-4">
-          <button className="bg-accent text-white px-6 py-3 rounded-md font-medium hover:bg-accent-hover transition">
-            Оставить заявку
-          </button>
+      {/* GRID */}
+      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10">
+        {/* LEFT */}
+        <div className="flex flex-col gap-10">
+          {/* РАССРОЧКА */}
+          <div className="border p-6 transition-all duration-300 hover:shadow-lg hover:border-primary">
+            <h2 className="text-xl font-semibold mb-6">Рассрочка 0%</h2>
+
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="flex items-start gap-3">
+                <Percent size={22} />
+                <div>
+                  <div className="font-medium">Без процентов</div>
+                  <div className="text-sm text-gray-600">0% переплаты на весь срок</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Clock size={22} />
+                <div>
+                  <div className="font-medium">Срок</div>
+                  <div className="text-sm text-gray-600">до 6 месяцев</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CreditCard size={22} />
+                <div>
+                  <div className="font-medium">Договор</div>
+                  <div className="text-sm text-gray-600">напрямую с нашей компанией</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Banknote size={22} />
+                <div>
+                  <div className="font-medium">Оплата</div>
+                  <div className="text-sm text-gray-600">интернет-банкинг или наличные</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 text-sm text-gray-600">
+              Для уточнения условий свяжитесь с нами — подберём удобный вариант оплаты.
+            </div>
+          </div>
+
+          {/* КРЕДИТ */}
+          <div className="border p-6 transition-all duration-300 hover:shadow-lg hover:border-primary">
+            <h2 className="text-xl font-semibold mb-6">Кредит через банк</h2>
+
+            <div className="flex items-center gap-3 mb-6 text-sm text-gray-600">
+              <CreditCard size={18} />
+              Беларускi народный банк
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div className="flex items-start gap-3">
+                <Percent size={22} />
+                <div>
+                  <div className="font-medium">Ставка</div>
+                  <div className="text-sm text-gray-600">
+                    4% первые 6 месяцев
+                    <br />
+                    17,81% далее
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Banknote size={22} />
+                <div>
+                  <div className="font-medium">Сумма</div>
+                  <div className="text-sm text-gray-600">от 100 до 40 000 BYN</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Clock size={22} />
+                <div>
+                  <div className="font-medium">Срок</div>
+                  <div className="text-sm text-gray-600">2, 3 или 5 лет</div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle size={22} />
+                <div>
+                  <div className="font-medium">Покрытие</div>
+                  <div className="text-sm text-gray-600">до 100% стоимости мебели</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ПРЕИМУЩЕСТВА */}
+          <div className="border p-6 transition-all duration-300 hover:shadow-lg hover:border-primary">
+            <h2 className="text-xl font-semibold mb-6">Почему это удобно</h2>
+
+            <div className="flex flex-col gap-4">
+              <div className="flex items-start gap-3">
+                <Smartphone size={22} />
+                <span className="text-gray-700">Оформление через приложение банка</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle size={22} />
+                <span className="text-gray-700">Без визита в отделение</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle size={22} />
+                <span className="text-gray-700">Быстрое одобрение</span>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <CheckCircle size={22} />
+                <span className="text-gray-700">Гибкие условия оплаты</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT */}
+        <div className="border p-6 flex flex-col justify-between lg:sticky lg:top-32 h-fit">
+          <div>
+            <h3 className="font-semibold mb-6">Варианты оплаты</h3>
+
+            <div className="flex flex-col gap-6 text-sm">
+              <div>
+                <div className="text-gray-500">Рассрочка</div>
+                <div className="font-medium">0% до 6 месяцев</div>
+              </div>
+
+              <div>
+                <div className="text-gray-500">Кредит</div>
+                <div className="font-medium">4% → 17,81%</div>
+              </div>
+
+              <div>
+                <div className="text-gray-500">Сумма</div>
+                <div className="font-medium">до 40 000 BYN</div>
+              </div>
+            </div>
+          </div>
 
           <Link
-            href="#conditions"
-            className="border border-border px-6 py-3 rounded-md font-medium hover:bg-hover transition text-center"
+            href="/contacts"
+            className="mt-10 block text-center px-6 py-3 border border-black transition-all duration-300 hover:bg-black hover:text-white"
           >
-            Условия
+            Оформить
           </Link>
         </div>
-      </section>
+      </div>
 
-      {/* Benefits */}
-      <section className="bg-secondary text-white py-16 px-4 md:px-16">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-xl font-semibold mb-2">0% переплаты</h3>
-            <p className="text-white/70">
-              Рассрочка без дополнительных процентов напрямую от нашей компании
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-semibold mb-2">До 6 месяцев</h3>
-            <p className="text-white/70">Удобный срок выплат без нагрузки на бюджет</p>
-          </div>
-
-          <div>
-            <h3 className="text-xl font-semibold mb-2">Быстрое оформление</h3>
-            <p className="text-white/70">Оформление заявки занимает не более 10 минут</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Conditions */}
-      <section id="conditions" className="py-16 px-4 md:px-16 max-w-6xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-semibold mb-8">Условия оформления</h2>
-
-        <ul className="space-y-3">
-          {[
-            'Гражданство РБ',
-            'Возраст от 18 лет',
-            'Паспорт или ID-карта',
-            'Первый взнос от 0%',
-          ].map((item, i) => (
-            <li key={i} className="list-disc pl-5 marker:text-accent text-lg">
-              {item}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Steps */}
-      <section className="bg-background py-16 px-4 md:px-16 max-w-6xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-semibold mb-8">Как оформить</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[
-            'Оставьте заявку на сайте',
-            'Мы свяжемся с вами',
-            'Подберем удобный вариант',
-            'Доставим и установим мебель',
-          ].map((step, i) => (
-            <div key={i} className="p-6 border border-border rounded-xl">
-              <p className="text-sm text-neutral-500 mb-2">Шаг {i + 1}</p>
-              <p className="font-medium">{step}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="bg-secondary text-white py-16 px-4 md:px-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-4">
-            Оставьте заявку и получите расчет уже сегодня
-          </h2>
-
-          <p className="text-white/70 mb-8">
-            Наш специалист свяжется с вами и подберёт лучший вариант оплаты
-          </p>
-
-          <button className="bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-neutral-200 transition">
-            Оставить заявку
-          </button>
-        </div>
-      </section>
-    </main>
+      {/* FOOTNOTE */}
+      <div className="mt-12 text-xs text-gray-500">
+        РВСР: 1.11 процентных пункта. Условия уточняются банком.
+      </div>
+    </section>
   );
 };
 

@@ -1,98 +1,101 @@
 'use client';
 
+import OrderForm from '_components/OrderForm';
+import useModal from '_hooks/useModal';
+import { HowOrderSections, Pages } from '_types/navigation';
 import Link from 'next/link';
 
 const steps = [
   {
-    title: 'Оставьте заявку',
-    text: 'Заполните форму на сайте или свяжитесь с нами любым удобным способом',
+    title: 'Предварительная консультация',
+    text: 'Свяжитесь с нами удобным способом: email, Instagram, телефон или оставьте заявку. Мы расскажем обо всех услугах и сделаем предварительный расчет стоимости.',
   },
   {
-    title: 'Консультация',
-    text: 'Мы уточним детали, подберём решения и ответим на все вопросы',
+    title: 'Замер помещения',
+    text: 'Согласуйте удобное время визита дизайнера. Выезд бесплатный. Специалист выполнит точные замеры помещения.',
   },
   {
-    title: 'Замер и дизайн',
-    text: 'Наш специалист приедет к вам, сделает замеры и предложит оптимальный вариант',
+    title: 'Создание проекта',
+    text: 'Обсудите ваши пожелания с дизайнером. Выберите материалы и фурнитуру. Определите размеры, форму и внутреннее наполнение.',
   },
   {
-    title: 'Договор и производство',
-    text: 'Заключаем договор и запускаем мебель в производство',
+    title: 'Расчёт и согласование',
+    text: 'Получите финальный расчет стоимости. Уточните все детали проекта и согласуйте сроки изготовления и доставки.',
   },
   {
-    title: 'Доставка и установка',
-    text: 'Доставим и аккуратно установим мебель у вас дома',
+    title: 'Изготовление мебели',
+    text: 'Производство на собственном оборудовании с контролем качества на каждом этапе.',
+  },
+  {
+    title: 'Доставка и монтаж',
+    text: 'Доставка в назначенную дату. Профессиональная и аккуратная сборка. Проверка всех механизмов.',
+  },
+  {
+    title: 'Наслаждение результатом',
+    text: 'Вы получаете готовую мебель, полностью соответствующую вашим ожиданиям.',
   },
 ];
 
 const HowOrderPage = () => {
+  const { openModal, closeModal } = useModal();
+
   return (
-    <main className="bg-background text-foreground">
-      {/* Hero */}
-      <section className="px-4 md:px-16 py-16 md:py-24 max-w-6xl mx-auto">
-        <h1 className="text-3xl md:text-5xl font-semibold mb-6">Как заказать мебель</h1>
-
-        <p className="text-lg md:text-xl text-neutral-600 max-w-2xl">
-          Всего несколько шагов — и ваша мебель уже в процессе создания
+    <section
+      id={HowOrderSections.algorithm}
+      className="mb-16 scroll-mt-64 px-4 sm:px-12 lg:px-16 xl:px-24"
+    >
+      {/* HEADER */}
+      <header className="py-[1rem] md:py-[2rem]">
+        <h1 className="text-4xl font-bold mb-4">Как заказать</h1>
+        <p className="text-lg text-gray-600">
+          Индивидуальная мебель под ваш интерьер — от идеи до установки
         </p>
-      </section>
+      </header>
 
-      {/* Steps */}
-      <section className="px-4 md:px-16 pb-16 md:pb-24 max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {steps.map((step, index) => (
-            <div
-              key={index}
-              className="relative p-6 md:p-8 border border-border rounded-2xl bg-white"
-            >
-              {/* Number */}
-              <div className="absolute -top-4 left-6 bg-accent text-white text-sm px-3 py-1 rounded-full">
-                Шаг {index + 1}
-              </div>
-
-              <h3 className="text-xl font-semibold mt-4 mb-3">{step.title}</h3>
-
-              <p className="text-neutral-600">{step.text}</p>
+      {/* STEPS */}
+      <div className="grid gap-6 md:grid-cols-2">
+        {steps.map((step, index) => (
+          <div
+            key={index}
+            className="group border border-gray-200 p-6 transition-all duration-300 hover:shadow-lg hover:border-primary"
+          >
+            {/* STEP NUMBER */}
+            <div className="text-3xl font-bold text-primary mb-3">
+              {String(index + 1).padStart(2, '0')}
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Timeline (альтернатива на десктопе) */}
-      <section className="hidden lg:block px-16 pb-24 max-w-6xl mx-auto">
-        <div className="relative border-l border-border pl-8 space-y-10">
-          {steps.map((step, index) => (
-            <div key={index} className="relative">
-              <div className="absolute -left-[10px] top-1 w-4 h-4 bg-accent rounded-full" />
-              <h4 className="font-semibold">{step.title}</h4>
-              <p className="text-neutral-600">{step.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+            {/* TITLE */}
+            <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+
+            {/* TEXT */}
+            <p className="text-gray-600 leading-relaxed">{step.text}</p>
+          </div>
+        ))}
+      </div>
 
       {/* CTA */}
-      <section className="bg-secondary text-white py-16 px-4 md:px-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold mb-4">Готовы начать?</h2>
+      <div className="mt-16 text-center">
+        <h2 className="text-2xl font-semibold mb-4">Готовы начать?</h2>
 
-          <p className="text-white/70 mb-8">Оставьте заявку — мы поможем реализовать ваш проект</p>
+        <p className="text-gray-600 mb-6">Свяжитесь с нами, и мы поможем реализовать ваш проект</p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-black px-6 py-3 rounded-md font-medium hover:bg-neutral-200 transition">
-              Оставить заявку
-            </button>
+        <div className="flex justify-center gap-2">
+          <Link
+            href={Pages.contacts}
+            className="w-full sm:w-auto text-center border text-black px-5 py-3 hover:bg-neutral-200 transition"
+          >
+            Связаться с нами
+          </Link>
 
-            <Link
-              href="/installment"
-              className="border border-white px-6 py-3 rounded-md font-medium hover:bg-white/10 transition"
-            >
-              Рассрочка и кредит
-            </Link>
-          </div>
+          <button
+            className="w-full sm:w-auto border px-5 py-3 hover:bg-white/10 transition cursor-pointer"
+            onClick={() => openModal(OrderForm, { onClose: closeModal })}
+          >
+            Оставить заявку
+          </button>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 };
 

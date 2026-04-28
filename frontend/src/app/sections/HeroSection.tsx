@@ -12,7 +12,7 @@ const HeroSection = () => {
   return (
     <section
       id={Pages.home}
-      className="relative h-screen w-full overflow-hidden mb-16 scroll-mt-64"
+      className="relative h-screen w-full overflow-hidden mb-16 scroll-mt-32"
     >
       {/* Background */}
       <div className="absolute inset-0">

@@ -18,10 +18,20 @@ enum HomeSections {
   reviews = 'reviews',
 }
 
+enum HowOrderSections {
+  algorithm = 'order',
+  order = 'payment',
+}
+
 const HomeSectionsNav = {
   [HomeSections.gallery]: { label: 'Галерея' },
   [HomeSections.about]: { label: 'О нас' },
   [HomeSections.reviews]: { label: 'Отзывы' },
+} as const;
+
+const HowOrderSectionsNav = {
+  [HowOrderSections.algorithm]: { label: 'Алгоритм' },
+  [HowOrderSections.order]: { label: 'Оплата' },
 } as const;
 
 const Nav = {
@@ -63,5 +73,5 @@ interface INavigation {
   getSections<K extends PageWithSections>(page: K): ISectionItem[];
 }
 
-export { HomeSections, Nav, Pages };
+export { HomeSections, HowOrderSections, Nav, Pages };
 export type { INavigation, IPage };

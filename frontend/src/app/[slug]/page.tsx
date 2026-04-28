@@ -1,7 +1,7 @@
 import Api from '_Api';
 import { slugify } from '_helpers/slugify-helper';
 import { Collection, ICategory } from 'src/lib/api/types';
-import CategoryPage from './CatigoryPage';
+import CategoryPage from './CategoryPage';
 
 interface CategoryProps {
   params: { slug: string };

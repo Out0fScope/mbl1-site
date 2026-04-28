@@ -17,7 +17,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
 
   return (
     <div
-      className="relative w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+      className="relative w-full max-w-6xl bg-white shadow-2xl overflow-hidden flex flex-col md:flex-row"
       onClick={(e) => e.stopPropagation()}
     >
       {/* ❌ КНОПКА ЗАКРЫТИЯ */}
@@ -36,7 +36,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
       </button>
 
       {/* LEFT — IMAGE */}
-      <div className="relative md:w-2/3 bg-black flex items-center justify-center">
+      <div className="relative flex items-center justify-center">
         {images.length > 0 && (
           <img
             src={`${url}/assets/${images[active]?.directus_files_id.id}`}

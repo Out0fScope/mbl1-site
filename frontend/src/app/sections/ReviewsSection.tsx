@@ -15,12 +15,15 @@ const reviews = [
 
 const ReviewsSection = () => {
   return (
-    <section id="reviews" className="cursor-default scroll-mt-48 px-4 sm:px-12 lg:px-16 xl:px-24">
+    <section
+      id="reviews"
+      className="cursor-default mb-16 scroll-mt-32 px-4 sm:px-12 lg:px-16 xl:px-24"
+    >
       <div className="h-full flex justify-between flex-col">
         {/* Header */}
-        <div className="max-w-xl mb-12">
+        <header className="py-2 md:py-4">
           <h2 className="text-lg uppercase tracking-widest text-foreground">Отзывы</h2>
-        </div>
+        </header>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

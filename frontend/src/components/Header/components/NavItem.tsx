@@ -1,5 +1,6 @@
 'use client';
 
+import useScroll from '_hooks/useScroll';
 import { IPage } from '_types/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
@@ -15,6 +16,9 @@ interface NavItemProps {
 
 const NavItem = ({ page, categories }: NavItemProps) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const { scrollY } = useScroll();
+
+  const isCompact = scrollY > 100;
 
   const pathname = usePathname();
 
@@ -25,7 +29,7 @@ const NavItem = ({ page, categories }: NavItemProps) => {
     >
       <Link
         href={page.link}
-        className={`btn-12 text-md font-medium z-10 ${
+        className={`btn-12 ${isCompact ? 'py-2!' : ''} text-md font-medium z-10 ${
           pathname === page.link || (page.link !== '/' && pathname.startsWith(page.link + '/'))
             ? 'active'
             : ''
