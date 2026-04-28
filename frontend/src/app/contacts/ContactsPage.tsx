@@ -1,6 +1,6 @@
 'use client';
 
-import { IContact } from '_api/types';
+import { IContacts } from '_api/types';
 import OrderForm from '_components/OrderForm';
 import InstagramIcon from '_icons/instagram.svg';
 import { Mail, Phone } from 'lucide-react';
@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Map from './Map';
 
 interface Props {
-  contacts: IContact;
+  contacts: IContacts;
 }
 
 const ContactsPage = ({ contacts }: Props) => {

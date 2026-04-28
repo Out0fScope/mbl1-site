@@ -1,4 +1,5 @@
 services:
+
   postgres:
     image: postgres:15-alpine
     restart: unless-stopped
@@ -19,8 +20,8 @@ services:
     ports:
       - "8055:8055"
     environment:
-      # KEY: ${DIRECTUS_KEY}
-      # SECRET: ${DIRECTUS_SECRET}
+      KEY: ${DIRECTUS_KEY}
+      SECRET: ${DIRECTUS_SECRET}
       ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
       ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
 

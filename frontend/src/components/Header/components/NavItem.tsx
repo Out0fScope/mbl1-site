@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { ICategory } from 'src/lib/api/types';
-import DropdownMenu from './DropdownMenu';
 
 interface NavItemProps {
   page: IPage;
@@ -47,9 +46,7 @@ const NavItem = ({ page, categories }: NavItemProps) => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-            >
-              <DropdownMenu categories={categories} />
-            </motion.div>
+            ></motion.div>
           )}
         </AnimatePresence>
       )}

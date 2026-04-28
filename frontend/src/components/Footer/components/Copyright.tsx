@@ -1,6 +1,6 @@
-import { IContact } from 'src/lib/api/types';
+import { IContacts } from 'src/lib/api/types';
 
-const Copyright = ({ contacts }: { contacts: IContact }) => {
+const Copyright = ({ contacts }: { contacts: IContacts }) => {
   return (
     <div className="flex flex-col pt-[1rem]">
       <p className="text-center text-xl text-muted/50">© {new Date().getFullYear()} MBL1</p>

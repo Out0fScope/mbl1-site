@@ -1,6 +1,6 @@
 'use client';
 
-import { IContact } from '_api/types';
+import { IContacts } from '_api/types';
 import useScroll from '_hooks/useScroll';
 import InstagramIcon from '_icons/instagram.svg';
 import { Mail } from 'lucide-react';
@@ -8,7 +8,7 @@ import Image from 'next/image';
 import CTAButton from './CTAButton';
 
 interface Props {
-  contacts: IContact;
+  contacts: IContacts;
 }
 
 const Contacts = ({ contacts }: Props) => {

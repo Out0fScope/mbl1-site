@@ -1,11 +1,11 @@
 'use client';
 
-import { IContact } from '_api/types';
+import { IContacts } from '_api/types';
 import useScroll from '_hooks/useScroll';
 import { Clock4, MapPin, Phone } from 'lucide-react';
 
 interface Props {
-  contacts: IContact;
+  contacts: IContacts;
 }
 
 const Info = ({ contacts }: Props) => {

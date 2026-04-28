@@ -10,7 +10,7 @@ const BurgerButton = () => {
   const pages = NavigationHelper.getPages().filter((page) => !page.hidden);
 
   const navigationItems = pages.map((page) => {
-    return { href: page.href, label: page.label };
+    return { href: page.link, label: page.name };
   });
 
   return (

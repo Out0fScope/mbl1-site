@@ -1,6 +1,6 @@
 'use client';
 
-import { ICategory, IContact } from 'src/lib/api/types';
+import { ICategory, IContacts } from 'src/lib/api/types';
 import BurgerButton from './components/BurgerButton';
 import Contacts from './components/Contacts';
 import Info from './components/Info';
@@ -8,7 +8,7 @@ import Logo from './components/Logo';
 import Navigation from './components/Navigation';
 
 interface HeaderProps {
-  contacts: IContact;
+  contacts: IContacts;
   categories: ICategory[];
 }
 

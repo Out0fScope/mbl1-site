@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { IContact } from 'src/lib/api/types';
+import { IContacts } from 'src/lib/api/types';
 
-const Info = ({ contacts }: { contacts: IContact }) => {
+const Info = ({ contacts }: { contacts: IContacts }) => {
   return (
     <div className="flex flex-col gap-[0.5rem] max-w-xs">
       <span className="text-4xl font-bold">MeBeL1</span>
