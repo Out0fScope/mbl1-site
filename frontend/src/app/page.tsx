@@ -1,8 +1,20 @@
+import Api from '_api/index';
+import { Collection } from '_api/types';
+import AboutSection from './sections/AboutSection';
+import GallerySection from './sections/GallerySection';
+import HeroSection from './sections/HeroSection';
+import ReviewsSection from './sections/ReviewsSection';
+
 const Home = async () => {
+  const categories = await Api.getData(Collection.Categories);
+
   return (
-    <div className="cursor-default scroll-mt-64">
-      <h1>Home</h1>
-    </div>
+    <>
+      <HeroSection />
+      <GallerySection categories={categories} />
+      <AboutSection />
+      <ReviewsSection />
+    </>
   );
 };
 

@@ -10,10 +10,10 @@ const Footer = async () => {
   if (!contacts) return null;
 
   return (
-    <footer className="pt-16 pb-16 bg-background/95 backdrop-blur-md shadow-md z-10 text-foreground cursor-default">
-      <div className="flex flex-col items-center px-4 sm:px-8 lg:px-16">
+    <footer className="py-8 px-4 sm:px-8 lg:px-20 bg-background/95 shadow-[0_-4px_16px_rgba(0,0,0,0.1)] z-10 text-foreground cursor-default">
+      <div className="flex flex-col items-center">
         {/* Основной блок с информацией и навигацией */}
-        <div className="flex flex-col lg:flex-row justify-between gap-[2.5rem] pb-[1rem] w-full max-w-[80rem] border-b border-muted">
+        <div className="flex flex-col lg:flex-row justify-between gap-[2.5rem] pb-[1rem] w-full border-b border-muted">
           {/* Информация */}
           <Info contacts={contacts} />
 

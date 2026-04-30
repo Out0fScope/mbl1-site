@@ -62,13 +62,23 @@
   --font-serif: var(--font-serif);
 }
 
+html {
+  position: relative;
+  scroll-behavior: smooth;
+}
+
 header {
   font-family: var(--font-sans);
   color: var(--color-text-strong);
 }
 
 body {
-  background: var(--color-bg);
+  background-attachment: fixed; /* Key property to keep the image fixed */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents tiling */
+  background-size: cover; /* Scales image to fill the screen */
+
+  background-color: var(--color-background);
   color: var(--color-text-primary);
   font-family: var(--font-serif);
 
@@ -78,6 +88,7 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  cursor: default;
 
   overflow-y: auto;
 }
@@ -187,7 +198,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: color-mix(in oklab, var(--color-muted) 45%, white);
 }
 
 ::-webkit-scrollbar-thumb {

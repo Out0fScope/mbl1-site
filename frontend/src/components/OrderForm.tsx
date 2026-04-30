@@ -6,17 +6,19 @@ import { X } from 'lucide-react';
 import { useState } from 'react';
 import UploadZone from './UploadZone';
 
-type Props = {
+interface OrderFormProps {
+  title?: string;
   onClose: () => void;
-};
+}
 
-const OrderForm = ({ onClose }: Props) => {
+const OrderForm = ({ title, onClose }: OrderFormProps) => {
   const [form, setForm] = useState({
     name: '',
     phone: '',
     email: '',
-    description: '',
-    needVisit: false,
+    description: title ? 'Ориентировочный проект: ' + title : '',
+    image: null,
+    designer: false,
   });
 
   const [file, setFile] = useState<File | null>(null);
@@ -30,32 +32,43 @@ const OrderForm = ({ onClose }: Props) => {
     }));
   };
 
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
-      setFile(e.target.files[0]);
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const sendData = async () => {
-      await Api.postData(Collection.Orders, payload);
-    };
+    let imageResult = null;
 
-    const payload: Array<any> = [];
-    payload.push(form);
+    // 1. upload
+    if (file) {
+      imageResult = await Api.uploadFile(file);
+      console.log('UPLOAD RESULT:', imageResult);
+    }
 
-    sendData();
-    setForm({ name: '', phone: '', email: '', description: '', needVisit: false });
+    // 2. формируем payload ЗДЕСЬ
+    const payload = [
+      {
+        ...form,
+        image: imageResult,
+      },
+    ];
 
-    console.log('FORM DATA:', form);
-    console.log('FILE:', file);
+    console.log('FINAL PAYLOAD:', payload);
 
-    // сюда потом API (Directus или backend)
+    // 3. отправляем
+    await Api.postData(Collection.Orders, payload);
+
+    // 4. очищаем
+    setForm({
+      name: '',
+      phone: '',
+      email: '',
+      description: '',
+      image: null,
+      designer: false,
+    });
+
+    setFile(null);
     onClose();
   };
-
   return (
     <div
       className="bg-white w-full max-w-lg p-6 relative"
@@ -63,10 +76,17 @@ const OrderForm = ({ onClose }: Props) => {
     >
       {/* ❌ кнопка закрытия */}
       <button
-        className="absolute top-3 right-3 text-xl cursor-pointer hover:bg-muted/30"
         onClick={onClose}
+        className="
+          absolute top-4 right-4 z-20
+          p-2 rounded-full
+          bg-black/50 text-white
+          backdrop-blur
+          hover:bg-black/70 hover:scale-110
+          transition-all duration-200 cursor-pointer
+        "
       >
-        <X />
+        <X size={20} />
       </button>
 
       <h2 className="text-xl mb-4 font-semibold">Оставьте заявку</h2>
@@ -118,12 +138,7 @@ const OrderForm = ({ onClose }: Props) => {
 
         {/* Чекбокс */}
         <label className="flex items-center gap-2 text-sm">
-          <input
-            type="checkbox"
-            name="needVisit"
-            checked={form.needVisit}
-            onChange={handleChange}
-          />
+          <input type="checkbox" name="designer" checked={form.designer} onChange={handleChange} />
           Нужен выезд замерщика / дизайнера
         </label>
 

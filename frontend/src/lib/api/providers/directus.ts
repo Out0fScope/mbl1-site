@@ -1,4 +1,11 @@
-import { createDirectus, createItems, readItems, rest, staticToken } from '@directus/sdk';
+import {
+  createDirectus,
+  createItems,
+  readItems,
+  rest,
+  staticToken,
+  uploadFiles,
+} from '@directus/sdk';
 import { getApiURL } from '_helpers/url-helper';
 
 const directus = createDirectus(getApiURL().href)
@@ -42,4 +49,21 @@ const postData = async (collection: string, data: any[], throwOnError = false): 
   }
 };
 
-export { getData, postData };
+const uploadFile = async (file: File, throwOnError = false) => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const result = await directus.request(uploadFiles(formData));
+
+    return result;
+  } catch (err) {
+    console.error('Error uploading file: ', err);
+
+    if (throwOnError) throw err;
+
+    return null;
+  }
+};
+
+export { getData, postData, uploadFile };

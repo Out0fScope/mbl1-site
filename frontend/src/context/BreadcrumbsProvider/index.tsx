@@ -5,64 +5,92 @@ import { Collection } from '_api/types';
 import Breadcrumbs from '_components/Breadcrumbs';
 import Navigation from '_helpers/navigation-helper';
 import { slugify } from '_helpers/slugify-helper';
-import { Pages } from '_types/navigation';
 import { usePathname } from 'next/navigation';
 import { createContext, useEffect, useMemo, useState } from 'react';
+import { ICategory } from 'src/lib/api/types';
 import { IBreadcrumb, IBreadcrumbsContext, IBreadcrumbsProviderProps } from './types';
 
 const BreadcrumbsContext = createContext<IBreadcrumbsContext | null>(null);
 
 const BreadcrumbsProvider = ({ children }: IBreadcrumbsProviderProps) => {
   const pathname = usePathname();
-  const [names, setNames] = useState<string[]>([]);
+
+  const [categories, setCategories] = useState<ICategory[]>([]);
   const [topName, setTopName] = useState<string>('');
 
-  // Fetch once
+  const pathSegments = useMemo(() => pathname.split('/').filter(Boolean), [pathname]);
+
+  const firstSegment = pathSegments[0];
+
+  // =========================
+  // FETCH DATA
+  // =========================
   useEffect(() => {
     const fetchData = async () => {
-      const pathSegments = pathname.split('/').filter(Boolean);
-      console.log(pathSegments);
+      const pages = Navigation.getPages();
 
-      setTopName(
-        Navigation.getPages().find((page) => page.href === '/' + pathSegments[0])?.label ?? ''
-      );
+      // static page check
+      const staticPage = pages.find((p) => p.link === '/' + firstSegment);
 
-      let data;
+      setTopName(staticPage?.name ?? '');
 
-      switch (pathSegments[0]) {
-        case Pages.catalog:
-          data = await Api.getData(Collection.Categories);
-          setNames(data.map((t) => t.title));
-
-          break;
+      // dynamic category route ([slug])
+      if (pathSegments.length === 1 && !staticPage) {
+        const data = await Api.getData(Collection.Categories);
+        setCategories(data);
       }
     };
 
     fetchData();
-  }, [pathname]);
+  }, [pathname, firstSegment, pathSegments.length]);
 
-  // ✅ Compute breadcrumbs instead of storing them
+  // =========================
+  // RESOLVERS
+  // =========================
+  const resolveStaticPage = (href: string) => {
+    return Navigation.getPages().find((p) => p.link === href);
+  };
+
+  const resolveCategory = (slug: string) => {
+    return categories.find((c) => slugify(c.title, { lower: true }) === slug);
+  };
+
+  // =========================
+  // BREADCRUMBS
+  // =========================
   const breadcrumbs: IBreadcrumb[] = useMemo(() => {
-    const pathSegments = pathname.split('/').filter(Boolean);
-
     return [
       { name: 'Главная', href: '/' },
+
       ...pathSegments.map((segment, index) => {
         const href = '/' + pathSegments.slice(0, index + 1).join('/');
 
-        const name = names.find((t) => slugify(t, { lower: true }) === segment) ?? topName;
+        console.log('href:', href);
+        console.log('pages:', Navigation.getPages());
 
-        return { name, href };
+        // 1. static page
+        const staticPage = resolveStaticPage(href);
+
+        if (staticPage) {
+          return {
+            name: staticPage.name,
+            href,
+          };
+        }
+
+        // 2. dynamic category
+        const category = resolveCategory(segment);
+
+        return {
+          name: category?.title ?? topName ?? segment,
+          href,
+        };
       }),
     ];
-  }, [pathname, names, topName]);
-
-  const value: IBreadcrumbsContext = {
-    breadcrumbs,
-  };
+  }, [pathname, categories, topName, pathSegments]);
 
   return (
-    <BreadcrumbsContext.Provider value={value}>
+    <BreadcrumbsContext.Provider value={{ breadcrumbs }}>
       <Breadcrumbs />
       {children}
     </BreadcrumbsContext.Provider>

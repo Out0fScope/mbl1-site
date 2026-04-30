@@ -5,12 +5,12 @@ enum Collection {
 }
 
 interface ICollectionMap {
-  [Collection.Contacts]: IContact[];
+  [Collection.Contacts]: IContacts[];
   [Collection.Categories]: ICategory[];
   [Collection.Orders]: IOrder[];
 }
 
-interface IContact {
+interface IContacts {
   email: string;
   phone1: string;
   phone2: string;
@@ -21,22 +21,13 @@ interface ICategory {
   title: string;
   description: string;
   image: { id: string };
-  sub_categories: ISubCategory[] | null;
-  groups_tag: GroupsTag[] | null;
-}
-
-interface ISubCategory {
-  title: string;
   projects: IProject[];
-  active: boolean;
 }
 
 interface IProject {
-  date_created: number;
-  description: string;
-  image: { id: string };
-  price: string;
   title: string;
+  description: string;
+  images: { directus_files_id: { id: string } }[];
 }
 
 interface IOrder {
@@ -44,23 +35,15 @@ interface IOrder {
   phone: string;
   email: string;
   description: string;
-}
-
-interface GroupsTag {
-  tag_groups_id: {
-    title: string;
-    tags: ITag[];
-  };
-}
-
-interface ITag {
-  title: string;
+  image: any | null;
+  designer: boolean;
 }
 
 interface IData {
   getData<K extends Collection>(key: K): Promise<ICollectionMap[K]>;
   postData<K extends Collection>(key: K, value: ICollectionMap[K]): Promise<void>;
+  uploadFile(file: File): Promise<any | null>;
 }
 
 export { Collection };
-export type { ICategory, ICollectionMap, IContact, IData, IOrder, IProject, ISubCategory };
+export type { ICategory, ICollectionMap, IContacts, IData, IOrder, IProject };

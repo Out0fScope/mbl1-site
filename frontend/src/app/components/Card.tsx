@@ -9,21 +9,18 @@ interface CardProps {
 }
 
 const Card = ({ item }: CardProps) => {
-  const qwe = `${url}/assets/${item.image.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7`;
-  console.log(qwe);
-
   return (
     <div className="group relative flex flex-col justify-between overflow-hidden shadow-lg min-h-[18rem] h-full text-white">
       {/* BACKGROUND */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
         style={{
-          backgroundImage: `url(${url}/assets/${item.image.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7)`,
+          backgroundImage: `url(${url}/assets/${item.image?.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7)`,
         }}
       />
 
       {/* DARK OVERLAY */}
-      <div className="absolute inset-0 bg-black/60 transition-all duration-500 group-hover:bg-black/20" />
+      <div className="absolute inset-0 bg-black/50 transition-all duration-500 group-hover:bg-black/20" />
 
       {/* CONTENT */}
       <div className="relative z-10 px-6 py-4 group-hover:opacity-0 transition-all duration-500">
@@ -34,7 +31,7 @@ const Card = ({ item }: CardProps) => {
       {/* BUTTON */}
       <div className="relative z-10 flex justify-end p-4">
         <Link
-          href={`/catalog/${slugify(item.title, { lower: true })}`}
+          href={`/${slugify(item.title, { lower: true })}`}
           className="relative block px-4 py-2 text-center
                      border border-card text-card
                      overflow-hidden transition-all duration-300"

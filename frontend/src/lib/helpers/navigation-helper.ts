@@ -12,8 +12,8 @@ const Navigation: INavigation = {
       };
 
       return {
-        href: pageData.link,
-        label: pageData.name,
+        link: pageData.link,
+        name: pageData.name,
         hidden: pageData.hidden ?? false,
         isDropdown: pageData.isDropdown ?? false,
       };
@@ -26,6 +26,20 @@ const Navigation: INavigation = {
 
   getName(page) {
     return Nav[page].name;
+  },
+
+  getSections(page) {
+    const sections = Nav[page].sections;
+
+    if (!sections) {
+      throw new Error(`Page "${page}" has no sections`);
+    }
+
+    // Convert object to array with id + label
+    return Object.entries(sections).map(([id, data]) => ({
+      id,
+      label: data.label,
+    }));
   },
 };
 
