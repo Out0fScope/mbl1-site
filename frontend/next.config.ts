@@ -1,7 +1,25 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+
+  output: 'standalone',
+
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '8055',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.mbl1.by',
+        pathname: '/**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

@@ -4,7 +4,7 @@
 node_modules/
 
 # =========================
-# Next.js build
+# Build outputs
 # =========================
 .next/
 out/
@@ -17,6 +17,18 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# =========================
+# Environment
+# =========================
+.env*
+!.env.example
+
+# =========================
+# Git
+# =========================
+.git
+.gitignore
 
 # =========================
 # Cache
@@ -32,38 +44,12 @@ pnpm-debug.log*
 coverage/
 
 # =========================
-# Environment
-# =========================
-.env
-.env.local
-.env.development.local
-.env.production.local
-.env.test.local
-!.env.example
-
-# =========================
-# Vercel
-# =========================
-.vercel
-
-# =========================
-# TypeScript
-# =========================
-*.tsbuildinfo
-
-# =========================
-# OS / misc
+# OS
 # =========================
 .DS_Store
 
 # =========================
-# SSL / secrets
+# Docker (не нужно внутри образа)
 # =========================
-*.pem
-*.key
-*.crt
-
-# =========================
-# Docker (optional)
-# =========================
-docker-compose.override.yml
+docker-compose.yml
+docker-compose.*.yml

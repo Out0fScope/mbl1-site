@@ -1,6 +1,6 @@
 services:
-
   postgres:
+    container_name: mbl1-postgres
     image: postgres:15-alpine
     restart: unless-stopped
     environment:
@@ -15,28 +15,28 @@ services:
       - internal
 
   directus:
+    container_name: mbl1-directus
     image: directus/directus:latest
     restart: unless-stopped
     ports:
-      - "8055:8055"
+      - '8055:8055'
     environment:
       KEY: ${DIRECTUS_KEY}
       SECRET: ${DIRECTUS_SECRET}
       ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL}
       ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD}
 
-      CORS_ENABLED: "true"
-      CORS_ORIGIN: "*"
-      CORS_METHODS: "GET,POST,PATCH,DELETE,OPTIONS"
-      CORS_HEADERS: "Content-Type,Authorization"
+      CORS_ENABLED: 'true'
+      CORS_ORIGIN: '*'
+      CORS_METHODS: 'GET,POST,PATCH,DELETE,OPTIONS'
+      CORS_HEADERS: 'Content-Type,Authorization'
 
-      DB_CLIENT: "pg"
+      DB_CLIENT: pg
       DB_HOST: postgres
       DB_PORT: 5432
-      DB_DATABASE: ${POSTGRES_DB}
       DB_USER: ${POSTGRES_USER}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
-
+      DB_DATABASE: ${POSTGRES_DB}
     depends_on:
       - postgres
     volumes:

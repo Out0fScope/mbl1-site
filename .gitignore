@@ -1,34 +1,33 @@
-<<<<<<< HEAD
-backend/
-=======
 # =========================
-# OS files
+# OS
 # =========================
-
 .DS_Store
 Thumbs.db
 
 # =========================
-# Environment files
+# Environment
 # =========================
-
 .env
-.env.*
-*.local
-docker-compose*
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+!.env.example
 
 # =========================
 # Logs
 # =========================
-
-logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
 # =========================
 # Editors / IDE
 # =========================
-
 .vscode/*
+!.vscode/settings.json
 !.vscode/extensions.json
 
 .idea/
@@ -37,21 +36,19 @@ logs/
 *.swo
 
 # =========================
-# Visual Studio
+# Docker
 # =========================
-
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
+docker-compose.override.yml
 
 # =========================
-# Node debug logs
+# Backend data
 # =========================
+backend/
+!backend/extensions
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
->>>>>>> 459dce6a007e9e96371dcdc9e043b7bdc8b15896
+# =========================
+# Coverage / temp
+# =========================
+coverage/
+tmp/
+temp/
