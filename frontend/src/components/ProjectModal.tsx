@@ -1,8 +1,10 @@
 'use client';
 
+import useModal from '_hooks/useModal';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { useState } from 'react';
 import { IProject } from 'src/lib/api/types';
+import OrderForm from './OrderForm';
 
 interface Props {
   project: IProject;
@@ -14,6 +16,8 @@ const url = process.env.NEXT_PUBLIC_CLIENT_API_URL;
 const ProjectModal = ({ project, onClose }: Props) => {
   const [active, setActive] = useState(0);
   const images = project.images || [];
+
+  const { openModal, closeModal } = useModal();
 
   return (
     <div
@@ -80,13 +84,22 @@ const ProjectModal = ({ project, onClose }: Props) => {
 
       {/* RIGHT — INFO */}
       <div className="md:w-1/3 p-6 flex flex-col justify-between">
-        <div>
-          <h2 className="text-xl font-semibold mb-4">{project.title}</h2>
-          <p className="text-sm text-gray-600">{project.description}</p>
+        <div className="h-full flex flex-col justify-between">
+          <div>
+            <h2 className="text-xl font-semibold mb-4">{project.title}</h2>
+            <p className="text-sm text-gray-600">{project.description}</p>
+          </div>
+
+          <button
+            onClick={() => openModal(OrderForm, { title: project.title, onClose: closeModal })}
+            className="w-full sm:w-auto text-center border text-black px-5 py-3 hover:bg-neutral-200 transition"
+          >
+            Связаться с нами
+          </button>
         </div>
 
         {/* thumbnails */}
-        <div className="flex gap-2 mt-6 overflow-x-auto">
+        <div className=" flex gap-2 mt-6">
           {images.map((img, i) => (
             <img
               key={i}

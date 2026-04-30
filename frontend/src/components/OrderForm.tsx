@@ -6,16 +6,17 @@ import { X } from 'lucide-react';
 import { useState } from 'react';
 import UploadZone from './UploadZone';
 
-type Props = {
+interface OrderFormProps {
+  title?: string;
   onClose: () => void;
-};
+}
 
-const OrderForm = ({ onClose }: Props) => {
+const OrderForm = ({ title, onClose }: OrderFormProps) => {
   const [form, setForm] = useState({
     name: '',
     phone: '',
     email: '',
-    description: '',
+    description: title ? 'Ориентировочный проект: ' + title : '',
     image: null,
     designer: false,
   });
