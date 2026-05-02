@@ -65,9 +65,6 @@ const BreadcrumbsProvider = ({ children }: IBreadcrumbsProviderProps) => {
       ...pathSegments.map((segment, index) => {
         const href = '/' + pathSegments.slice(0, index + 1).join('/');
 
-        console.log('href:', href);
-        console.log('pages:', Navigation.getPages());
-
         // 1. static page
         const staticPage = resolveStaticPage(href);
 

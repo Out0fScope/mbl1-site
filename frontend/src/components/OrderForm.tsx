@@ -40,7 +40,6 @@ const OrderForm = ({ title, onClose }: OrderFormProps) => {
     // 1. upload
     if (file) {
       imageResult = await Api.uploadFile(file);
-      console.log('UPLOAD RESULT:', imageResult);
     }
 
     // 2. формируем payload ЗДЕСЬ
@@ -50,8 +49,6 @@ const OrderForm = ({ title, onClose }: OrderFormProps) => {
         image: imageResult,
       },
     ];
-
-    console.log('FINAL PAYLOAD:', payload);
 
     // 3. отправляем
     await Api.postData(Collection.Orders, payload);

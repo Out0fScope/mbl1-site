@@ -1,7 +1,6 @@
 services:
   web-site:
     container_name: mbl1-site
-    image: mbl1
     build:
       context: ./frontend
     restart: unless-stopped
@@ -23,6 +22,8 @@ services:
     networks:
       - internal
       - srv_default
+    depends_on:
+      - directus
 
   directus:
     container_name: mbl1-directus
@@ -69,11 +70,10 @@ services:
 
       - 'traefik.http.services.mbl1_cms.loadbalancer.server.port=8055'
     networks:
-      # srv_default:
-      #   aliases:
-      #     - mbl1_cms
-      # internal: {}
-      - internal
+      srv_default:
+        aliases:
+          - mbl1_cms
+      internal: {}
 
   postgres:
     container_name: mbl1-postgres

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Footer from '_components/Footer';
 import Header from '_components/Header';
 import AppProvider from '_context/AppProvider';
