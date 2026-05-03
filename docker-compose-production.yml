@@ -6,6 +6,7 @@ services:
     restart: unless-stopped
     environment:
       - NODE_ENV=production
+      - HOST=${SITE_HOST}
       - PORT=${SITE_PORT}
     labels:
       - 'traefik.enable=true'
@@ -20,8 +21,8 @@ services:
       - 'traefik.http.middlewares.mbl1_auth.basicauth.users=user:$$apr1$$0uUP0X6r$$.ADas4BH3jSlUM3BYUqQ2.'
       - 'traefik.http.routers.mbl1_site.middlewares=mbl1_auth'
     networks:
-      - internal
       - srv_default
+      - internal
 
   directus:
     container_name: mbl1-directus
