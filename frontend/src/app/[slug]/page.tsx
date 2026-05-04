@@ -4,15 +4,23 @@ import { Collection, ICategory } from 'src/lib/api/types';
 import CategoryPage from './CategoryPage';
 
 interface CategoryProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-const Category = async (props: CategoryProps) => {
+export async function generateStaticParams() {
   const categories: ICategory[] = await Api.getData(Collection.Categories);
-  const params = await props.params;
-  const category = categories.find((t) => slugify(t.title, { lower: true }) === params.slug);
 
-  if (!category) return <div>Категория не найдена</div>;
+  return categories.map((category) => ({
+    slug: slugify(category.title, { lower: true }),
+  }));
+}
+
+const Category = async ({ params }: CategoryProps) => {
+  const { slug } = await params;
+  const categories: ICategory[] = await Api.getData(Collection.Categories);
+  const category = categories.find((t) => slugify(t.title, { lower: true }) === slug);
+
+  if (!category) return <div>Категория пуста</div>;
 
   return <CategoryPage category={category} />;
 };

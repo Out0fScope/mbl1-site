@@ -3,16 +3,12 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-  output: 'standalone',
+  // ВАЖНО: включаем статический экспорт
+  output: 'export',
 
   images: {
+    unoptimized: true, // важно для статического хостинга
     remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8055',
-        pathname: '/**',
-      },
       {
         protocol: 'https',
         hostname: 'api.mbl1.by',
