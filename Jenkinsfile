@@ -1,47 +1,64 @@
 pipeline {
-    agent any 
+    agent any
+
+    environment {
+        BUILD_DIR = 'out'
+
+        FTP_HOST = 'ftp.mbl1.by'
+        FTP_USER = 'mbl1_ftp@dev.mbl1.by'
+        FTP_PASS = 'oCPJzA{$fW{U'   // ⚠️ потом уберём в credentials
+        REMOTE_PATH = 'public_html/dev/' // уточни путь!
+        
+        NEXT_PUBLIC_CLIENT_API_URL = 'https://api.mbl1.by'
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                // Pulls code from your GitHub repository
                 checkout scm
             }
         }
 
-        stage('Build') {
+        stage('Install') {
             steps {
-                echo 'Building your application...'
-                // Example for a Node.js project:
-                // sh 'npm install'
+                sh 'npm ci'
             }
         }
 
-        stage('Test') {
+        stage('Build (SSG)') {
             steps {
-                echo 'Running automated tests...'
-                // Example:
-                // sh 'npm test'
+                sh 'npm run build'
             }
         }
 
-        stage('Deploy') {
+        stage('Check build') {
             steps {
-                echo 'Deploying to the server...'
-                // Add deployment commands here
+                sh 'ls -la out'
+            }
+        }
+
+        stage('Deploy via FTP') {
+            steps {
+                sh '''
+                apt-get update -y
+                apt-get install -y lftp
+
+                lftp -u $FTP_USER,$FTP_PASS $FTP_HOST <<EOF
+                set ftp:ssl-allow no
+                mirror -R --delete $BUILD_DIR $REMOTE_PATH
+                quit
+EOF
+                '''
             }
         }
     }
 
     post {
-        always {
-            echo 'Pipeline finished. Cleaning up...'
-        }
         success {
-            echo 'Build and Test succeeded!'
+            echo '🚀 Deploy SUCCESS'
         }
         failure {
-            echo 'Build failed. Please check the logs.'
+            echo '💥 Deploy FAILED'
         }
     }
 }
