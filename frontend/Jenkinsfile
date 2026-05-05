@@ -9,9 +9,7 @@ pipeline {
         PROJECT_DIR = 'frontend'
         BUILD_DIR = 'out'
 
-        FTP_HOST = '93.125.99.44'
-        FTP_USER = 'mbl1_ftp@dev.mbl1.by'
-        FTP_PASS = 'uaQ5nXs)M0a@'
+        FTP_HOST = 'dev.mbl1.by'
         REMOTE_PATH = 'public_html/dev/'
     }
 
@@ -24,15 +22,15 @@ pipeline {
 
         stage('Install') {
             steps {
-                dir('frontend') {
-                    sh 'npm ci'
+                dir(PROJECT_DIR) {
+                    sh 'npm install'
                 }
             }
         }
 
         stage('Build (SSG)') {
             steps {
-                dir('frontend') {
+                dir(PROJECT_DIR) {
                     sh 'npm run build'
                 }
             }
@@ -40,7 +38,7 @@ pipeline {
 
         stage('Check build') {
             steps {
-                dir('frontend') {
+                dir(PROJECT_DIR) {
                     sh 'ls -la out'
                 }
             }
@@ -48,16 +46,22 @@ pipeline {
 
         stage('Deploy via FTP') {
             steps {
-                sh '''
-                apt-get update -y
-                apt-get install -y lftp
+                withCredentials([usernamePassword(
+                    credentialsId: 'ftp-password',
+                    usernameVariable: 'FTP_USER',
+                    passwordVariable: 'FTP_PASS'
+                )]) {
+                    sh '''
+                    apt-get update -y
+                    apt-get install -y lftp
 
-                lftp -u $FTP_USER,$FTP_PASS $FTP_HOST <<EOF
-                set ftp:ssl-allow no
-                mirror -R --delete $PROJECT_DIR/$BUILD_DIR/ $REMOTE_PATH
-                quit
+                    lftp -u $FTP_USER,$FTP_PASS $FTP_HOST <<EOF
+                    set ftp:ssl-allow no
+                    mirror -R --delete $PROJECT_DIR/$BUILD_DIR/ $REMOTE_PATH
+                    quit
 EOF
-                '''
+                    '''
+                }
             }
         }
     }
