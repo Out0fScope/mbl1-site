@@ -6,6 +6,8 @@ pipeline {
     }
 
     environment {
+        NEXT_PUBLIC_CLIENT_API_URL='https://api.mbl1.by'
+        
         PROJECT_DIR = 'frontend'
         BUILD_DIR = 'out'
 
