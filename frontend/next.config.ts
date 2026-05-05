@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
   // ВАЖНО: включаем статический экспорт
   output: 'export',
 
+  trailingSlash: true,
+
   images: {
     unoptimized: true, // важно для статического хостинга
     remotePatterns: [
