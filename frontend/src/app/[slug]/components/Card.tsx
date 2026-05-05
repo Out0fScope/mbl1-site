@@ -1,3 +1,5 @@
+'use client';
+
 import ProjectModal from '_components/ProjectModal';
 import useModal from '_hooks/useModal';
 import { IProject } from 'src/lib/api/types';

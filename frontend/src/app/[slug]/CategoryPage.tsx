@@ -39,7 +39,7 @@ const CategoryPage = ({ category }: CategoryPageProps) => {
         {/* EMPTY STATE */}
         {category.projects?.length === 0 && (
           <div className="col-span-full text-center py-16 sm:py-20 text-muted text-sm sm:text-base">
-            Ничего не найдено по выбранным фильтрам
+            Ничего не найдено
           </div>
         )}
       </div>

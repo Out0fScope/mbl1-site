@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-static';
 
 import Footer from '_components/Footer';
 import Header from '_components/Header';
