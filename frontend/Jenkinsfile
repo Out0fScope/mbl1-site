@@ -9,12 +9,10 @@ pipeline {
         PROJECT_DIR = 'frontend'
         BUILD_DIR = 'out'
 
-        FTP_HOST = '93.125.99.44'
-        FTP_USER = 'mbl1_ftp@dev.mbl1.by'
-        FTP_PASS = 'U9JWJ2s4D)OY'
+        FTP_HOST = 'ftp.mbl1.by'
+        FTP_USER = '54cda2d1@mbl1.by'
+        FTP_PASS = 'uBh?av&ex7n!'
         REMOTE_PATH = 'public_html/dev/'
-        
-        NEXT_PUBLIC_CLIENT_API_URL = 'https://api.mbl1.by'
     }
 
     stages {
