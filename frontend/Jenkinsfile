@@ -11,8 +11,8 @@ pipeline {
 
         FTP_HOST = 'ftp.mbl1.by'
         FTP_USER = 'mbl1_ftp@dev.mbl1.by'
-        FTP_PASS = 'oCPJzA{$fW{U'   // ⚠️ потом уберём в credentials
-        REMOTE_PATH = 'public_html/dev/' // уточни путь!
+        FTP_PASS = 'U9JWJ2s4D)OY'
+        REMOTE_PATH = 'public_html/dev/'
         
         NEXT_PUBLIC_CLIENT_API_URL = 'https://api.mbl1.by'
     }
