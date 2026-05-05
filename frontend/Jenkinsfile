@@ -1,13 +1,12 @@
 pipeline {
     agent any
 
-    environment { PROJECT_DIR = 'frontend' }
-
     tools {
         nodejs 'node-20'
     }
 
     environment {
+        PROJECT_DIR = 'frontend'
         BUILD_DIR = 'out'
 
         FTP_HOST = 'ftp.mbl1.by'
