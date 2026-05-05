@@ -56,7 +56,7 @@ pipeline {
 
                 lftp -u $FTP_USER,$FTP_PASS $FTP_HOST <<EOF
                 set ftp:ssl-allow no
-                mirror -R --delete $BUILD_DIR $REMOTE_PATH
+                mirror -R --delete $PROJECT_DIR/$BUILD_DIR $REMOTE_PATH
                 quit
 EOF
                 '''
