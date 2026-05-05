@@ -10,8 +10,8 @@ pipeline {
         BUILD_DIR = 'out'
 
         FTP_HOST = '93.125.99.44'
-        FTP_USER = '54cda2d1@mbl1.by'
-        FTP_PASS = 'uBh?av&ex7n!'
+        FTP_USER = 'mbl1_ftp@dev.mbl1.by'
+        FTP_PASS = 'uaQ5nXs)M0a@'
         REMOTE_PATH = 'public_html/dev/'
     }
 
