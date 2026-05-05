@@ -34,13 +34,17 @@ pipeline {
 
         stage('Build (SSG)') {
             steps {
-                sh 'npm run build'
+                dir('frontend') {
+                    sh 'npm run build'
+                }
             }
         }
 
         stage('Check build') {
             steps {
-                sh 'ls -la out'
+                dir('frontend') {
+                    sh 'ls -la out'
+                }
             }
         }
 
