@@ -11,10 +11,8 @@ pipeline {
 
         FTP_HOST = '93.125.99.44'
         FTP_USER = 'mbl1_ftp@dev.mbl1.by'
-        FTP_PASS = 'U9JWJ2s4D)OY'
+        FTP_PASS = 'uaQ5nXs)M0a@'
         REMOTE_PATH = 'public_html/dev/'
-        
-        NEXT_PUBLIC_CLIENT_API_URL = 'https://api.mbl1.by'
     }
 
     stages {
@@ -56,7 +54,7 @@ pipeline {
 
                 lftp -u $FTP_USER,$FTP_PASS $FTP_HOST <<EOF
                 set ftp:ssl-allow no
-                mirror -R --delete $PROJECT_DIR/$BUILD_DIR $REMOTE_PATH
+                mirror -R --delete $PROJECT_DIR/$BUILD_DIR/ $REMOTE_PATH
                 quit
 EOF
                 '''
