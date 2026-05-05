@@ -84,7 +84,7 @@ const Contacts = ({ contacts }: Props) => {
                 hover:text-primary
               `}
             >
-              @mbl_123_mebel
+              @mbl_1_mebel
             </a>
           </div>
         </div>
