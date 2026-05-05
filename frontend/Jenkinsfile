@@ -47,13 +47,13 @@ pipeline {
         stage('Deploy via FTP') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'ftp-password',
+                    credentialsId: 'ftp-cred',
                     usernameVariable: 'FTP_USER',
                     passwordVariable: 'FTP_PASS'
                 )]) {
                     sh '''
-                    apt-get update -y
-                    apt-get install -y lftp
+                    # Устанавливаем lftp, если его нет
+                    which lftp || (apt-get update -y && apt-get install -y lftp)
 
                     lftp -u $FTP_USER,$FTP_PASS $FTP_HOST <<EOF
                     set ftp:ssl-allow no
