@@ -26,7 +26,9 @@ pipeline {
 
         stage('Install') {
             steps {
-                sh 'npm ci'
+                dir('frontend') {
+                    sh 'npm ci'
+                }
             }
         }
 
