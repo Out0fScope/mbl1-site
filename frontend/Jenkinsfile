@@ -5,7 +5,8 @@ pipeline {
         nodejs 'node-22'
     }
 
-    environment {        
+    environment {
+        API_TOKEN = 'GbOjzxPfosOPItS_v28R-DYNyFR5kBN7'
         PROJECT_DIR = 'frontend'
         BUILD_DIR = 'out'
 
@@ -14,6 +15,12 @@ pipeline {
     }
 
     stages {
+        stage('Clean workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+        
         stage('Checkout') {
             steps {
                 checkout scm
