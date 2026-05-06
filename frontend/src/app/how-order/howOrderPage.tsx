@@ -1,9 +1,11 @@
 'use client';
 
 import OrderForm from '_components/OrderForm';
+import { useActiveStep } from '_hooks/useActiveStep';
 import useModal from '_hooks/useModal';
 import { HowOrderSections, Pages } from '_types/navigation';
 import Link from 'next/link';
+import { useRef } from 'react';
 
 const steps = [
   {
@@ -16,79 +18,111 @@ const steps = [
   },
   {
     title: 'Создание проекта',
-    text: 'Обсудите ваши пожелания с дизайнером. Выберите материалы и фурнитуру. Определите размеры, форму и внутреннее наполнение.',
+    text: 'Обсудите ваши пожелания с дизайнером. Выберите материалы и фурнитуру.',
   },
   {
     title: 'Расчёт и согласование',
-    text: 'Получите финальный расчет стоимости. Уточните все детали проекта и согласуйте сроки изготовления и доставки.',
+    text: 'Получите финальный расчет и согласуйте сроки.',
   },
   {
     title: 'Изготовление мебели',
-    text: 'Производство на собственном оборудовании с контролем качества на каждом этапе.',
+    text: 'Производство с контролем качества на каждом этапе.',
   },
   {
     title: 'Доставка и монтаж',
-    text: 'Доставка в назначенную дату. Профессиональная и аккуратная сборка. Проверка всех механизмов.',
-  },
-  {
-    title: 'Наслаждение результатом',
-    text: 'Вы получаете готовую мебель, полностью соответствующую вашим ожиданиям.',
+    text: 'Доставка и аккуратная сборка мебели.',
   },
 ];
 
 const HowOrderPage = () => {
   const { openModal, closeModal } = useModal();
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const { active, progress } = useActiveStep(containerRef);
 
   return (
     <section
       id={HowOrderSections.algorithm}
-      className="mb-16 scroll-mt-64 px-4 sm:px-12 lg:px-16 xl:px-24"
+      className="mb-24 scroll-mt-64 px-4 sm:px-12 lg:px-16 xl:px-24"
     >
       {/* HEADER */}
-      <header className="py-[1rem] md:py-[2rem]">
-        <h1 className="text-4xl font-bold mb-4">Как заказать</h1>
-        <p className="text-lg text-gray-600">
-          Индивидуальная мебель под ваш интерьер — от идеи до установки
-        </p>
+      <header className="py-10">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">Как заказать</h1>
+        <p className="text-lg text-gray-600 max-w-xl">Понятный процесс от идеи до готовой мебели</p>
       </header>
 
-      {/* STEPS */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {steps.map((step, index) => (
-          <div
-            key={index}
-            className="group border border-gray-200 p-6 transition-all duration-300 hover:shadow-lg hover:border-primary"
-          >
-            {/* STEP NUMBER */}
-            <div className="text-3xl font-bold text-primary mb-3">
-              {String(index + 1).padStart(2, '0')}
-            </div>
+      {/* TIMELINE */}
+      <div ref={containerRef} className="relative">
+        {/* BACKGROUND LINE */}
+        <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gray-200" />
 
-            {/* TITLE */}
-            <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+        {/* PROGRESS LINE */}
+        <div
+          className="hidden lg:block absolute left-1/2 top-0 w-px bg-primary transition-all duration-500 ease-out"
+          style={{ height: progress }}
+        />
 
-            {/* TEXT */}
-            <p className="text-gray-600 leading-relaxed">{step.text}</p>
-          </div>
-        ))}
+        <div className="flex flex-col gap-20">
+          {steps.map((step, i) => {
+            const isPassed = i <= active;
+            const isCurrent = i === active;
+
+            return (
+              <div
+                key={i}
+                data-step
+                className={`relative flex items-center min-h-40 ${
+                  i % 2 === 0 ? 'lg:justify-end lg:pr-16' : 'lg:justify-start lg:pl-16'
+                }`}
+              >
+                {/* DOT */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold border-2 transition-all duration-300 ${
+                      isPassed
+                        ? 'bg-primary text-white border-primary'
+                        : 'bg-white text-gray-400 border-gray-300'
+                    } ${isCurrent ? 'scale-110 shadow-lg' : ''}`}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </div>
+                </div>
+
+                {/* CARD */}
+                <div
+                  className={`max-w-md w-full p-6 rounded-md border transition-all duration-300 ${
+                    isCurrent
+                      ? 'shadow-xl border-primary bg-white'
+                      : isPassed
+                        ? 'bg-white'
+                        : 'bg-white/60'
+                  }`}
+                >
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+
+                  <p className="text-gray-600 leading-relaxed">{step.text}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* CTA */}
-      <div className="mt-16 text-center">
+      <div className="mt-20 text-center">
         <h2 className="text-2xl font-semibold mb-4">Готовы начать?</h2>
 
-        <p className="text-gray-600 mb-6">Свяжитесь с нами, и мы поможем реализовать ваш проект</p>
+        <p className="text-gray-600 mb-6">Свяжитесь с нами — поможем реализовать ваш проект</p>
 
-        <div className="flex justify-center gap-2">
+        <div className="flex justify-center gap-3 flex-wrap">
           <Link
             href={Pages.contacts}
-            className="w-full sm:w-auto text-center border text-black px-5 py-3 hover:bg-neutral-200 transition"
+            className="px-6 py-3 border border-black hover:bg-black hover:text-white transition"
           >
-            Связаться с нами
+            Связаться
           </Link>
 
           <button
-            className="w-full sm:w-auto border px-5 py-3 hover:bg-white/10 transition cursor-pointer"
+            className="px-6 py-3 bg-primary text-white hover:opacity-90 transition"
             onClick={() => openModal(OrderForm, { onClose: closeModal })}
           >
             Оставить заявку

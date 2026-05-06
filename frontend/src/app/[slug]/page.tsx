@@ -21,7 +21,7 @@ const Category = async ({ params }: CategoryProps) => {
   const categories: ICategory[] = await Api.getData(Collection.Categories);
   const category = categories.find((t) => slugify(t.title, { lower: true }) === slug);
 
-  if (!category) return <div>Категория пуста</div>;
+  if (!category) return;
 
   return (
     <BreadcrumbsProvider categories={categories}>
