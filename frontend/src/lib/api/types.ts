@@ -15,6 +15,7 @@ interface IContacts {
   phone1: string;
   phone2: string;
   address: string;
+  pin: string;
 }
 
 interface ICategory {
