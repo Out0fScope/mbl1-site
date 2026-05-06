@@ -10,7 +10,7 @@ import { getApiURL } from '_helpers/url-helper';
 
 const directus = createDirectus(getApiURL().href)
   .with(rest())
-  .with(staticToken('GbOjzxPfosOPItS_v28R-DYNyFR5kBN7'));
+  .with(staticToken(process.env.API_TOKEN!));
 
 const getData = async (
   collection: string,
