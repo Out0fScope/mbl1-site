@@ -219,3 +219,70 @@ body {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 4rem;
+  aspect-ratio: 0.75;
+
+  --color-a: #000;
+  --color-b: #000;
+  --color-c: #000;
+
+  --a: no-repeat linear-gradient(var(--color-a) 0 0);
+  --b: no-repeat linear-gradient(var(--color-b) 0 0);
+  --c: no-repeat linear-gradient(var(--color-c) 0 0);
+
+  background:
+    var(--a) 0% 100%,
+    var(--b) 50% 100%,
+    var(--c) 100% 100%;
+
+  background-size: 20% 65%;
+  animation: l5 0.75s infinite linear;
+}
+
+@keyframes l5 {
+  0% {
+    --color-a: var(--color-primary);
+  }
+  20% {
+    background-position:
+      0% 50%,
+      50% 100%,
+      100% 100%;
+    --color-c: black;
+  }
+  30% {
+  }
+  40% {
+    background-position:
+      0% 0%,
+      50% 50%,
+      100% 100%;
+  }
+  50% {
+  }
+  60% {
+    background-position:
+      0% 100%,
+      50% 0%,
+      100% 50%;
+    --color-a: black;
+    --color-b: var(--color-primary);
+  }
+  75% {
+  }
+  80% {
+    background-position:
+      0% 100%,
+      50% 100%,
+      100% 0%;
+    --color-b: black;
+  }
+  90% {
+  }
+  100% {
+    --color-c: var(--color-primary);
+  }
+}
