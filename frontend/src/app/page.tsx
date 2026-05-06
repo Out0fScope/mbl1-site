@@ -8,6 +8,8 @@ import ReviewsSection from './sections/ReviewsSection';
 const Home = async () => {
   const categories = await Api.getData(Collection.Categories);
 
+  console.log(process.env.API_TOKEN);
+
   return (
     <>
       <HeroSection />

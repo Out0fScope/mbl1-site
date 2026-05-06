@@ -1,4 +1,5 @@
 import Api from '_Api';
+import { BreadcrumbsProvider } from '_context/BreadcrumbsProvider';
 import { slugify } from '_helpers/slugify-helper';
 import { Collection, ICategory } from 'src/lib/api/types';
 import CategoryPage from './CategoryPage';
@@ -22,7 +23,11 @@ const Category = async ({ params }: CategoryProps) => {
 
   if (!category) return <div>Категория пуста</div>;
 
-  return <CategoryPage category={category} />;
+  return (
+    <BreadcrumbsProvider categories={categories}>
+      <CategoryPage category={category} />
+    </BreadcrumbsProvider>
+  );
 };
 
 export default Category;

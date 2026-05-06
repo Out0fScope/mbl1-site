@@ -3,7 +3,6 @@ export const dynamic = 'force-static';
 import Footer from '_components/Footer';
 import Header from '_components/Header';
 import AppProvider from '_context/AppProvider';
-import { BreadcrumbsProvider } from '_context/BreadcrumbsProvider';
 import type { Metadata } from 'next';
 import { Inter, Manrope } from 'next/font/google';
 import './globals.css';
@@ -42,7 +41,7 @@ export default function RootLayout({
             Перейти к основному контенту
           </a>
           <main id="main-content" className="min-h-screen mt-16 md:mt-24 lg:mt-16">
-            <BreadcrumbsProvider>{children}</BreadcrumbsProvider>
+            {children}
           </main>
           <Footer />
         </AppProvider>
