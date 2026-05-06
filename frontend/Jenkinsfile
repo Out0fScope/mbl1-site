@@ -8,7 +8,7 @@ pipeline {
     environment {
         NEXT_PUBLIC_CLIENT_API_URL='https://api.mbl1.by'
 
-        API_TOKEN='GbOjzxPfosOPItS_v28R-DYNyFR5kBN7'
+        API_TOKEN=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7
         
         PROJECT_DIR = 'frontend'
         BUILD_DIR = 'out'
