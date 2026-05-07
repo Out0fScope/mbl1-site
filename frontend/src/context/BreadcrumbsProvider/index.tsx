@@ -45,8 +45,6 @@ const BreadcrumbsProvider = ({ children, categories = [] }: Props) => {
 
         const category = resolveCategory(segment);
 
-        console.log(categories);
-
         return {
           name: category?.title ?? segment,
           href,
