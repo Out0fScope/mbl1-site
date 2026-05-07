@@ -3,6 +3,7 @@
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import UploadZone from './UploadZone';
+import { createOrder, uploadFile } from '_helpers/client-fetch-helper';
 
 interface OrderFormProps {
   title?: string;
@@ -33,37 +34,35 @@ const OrderForm = ({ title, onClose }: OrderFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formData = new FormData();
+    try {
+      let imageResult = null;
 
-    if (file) {
-      formData.append('file', file);
+      if (file) {
+        const uploaded = await uploadFile(file);
+        imageResult = uploaded.data.id;
+      }
+
+      const payload = {
+        ...form,
+        image: imageResult,
+      };
+
+      await createOrder(payload);
+
+      setForm({
+        name: '',
+        phone: '',
+        email: '',
+        description: '',
+        image: null,
+        designer: false,
+      });
+
+      setFile(null);
+      onClose();
+    } catch (e) {
+      console.error(e);
     }
-
-    formData.append(
-      'data',
-      JSON.stringify([
-        {
-          ...form,
-        },
-      ])
-    );
-
-    await fetch('/api/orders', {
-      method: 'POST',
-      body: formData,
-    });
-
-    setForm({
-      name: '',
-      phone: '',
-      email: '',
-      description: '',
-      image: null,
-      designer: false,
-    });
-
-    setFile(null);
-    onClose();
   };
 
   return (
