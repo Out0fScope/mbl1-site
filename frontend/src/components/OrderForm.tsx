@@ -139,7 +139,10 @@ const OrderForm = ({ title, onClose }: OrderFormProps) => {
         </label>
 
         {/* Кнопка */}
-        <button type="submit" className="bg-black text-white py-2 hover:opacity-80 transition">
+        <button
+          type="submit"
+          className="bg-black text-white py-2 hover:opacity-80 transition cursor-pointer"
+        >
           Отправить заявку
         </button>
       </form>

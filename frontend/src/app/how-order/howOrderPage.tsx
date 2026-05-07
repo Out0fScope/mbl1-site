@@ -61,7 +61,7 @@ const HowOrderPage = () => {
           style={{ height: progress }}
         />
 
-        <div className="flex flex-col gap-20">
+        <div className="flex flex-col gap-10 lg:gap-20">
           {steps.map((step, i) => {
             const isPassed = i <= active;
             const isCurrent = i === active;
@@ -70,12 +70,39 @@ const HowOrderPage = () => {
               <div
                 key={i}
                 data-step
-                className={`relative flex items-center min-h-40 ${
-                  i % 2 === 0 ? 'lg:justify-end lg:pr-16' : 'lg:justify-start lg:pl-16'
+                className={`relative flex flex-col items-center lg:flex-row lg:items-center min-h-40 ${
+                  i % 2 === 0 ? 'lg:justify-end' : 'lg:justify-start'
                 }`}
               >
-                {/* DOT */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                {/* CARD */}
+                <div
+                  className={`relative max-sm:pt-16 max-w-md xl:max-w-xl w-full p-6 rounded-md border transition-all duration-300 ${
+                    isCurrent
+                      ? 'shadow-xl border-primary bg-white'
+                      : isPassed
+                        ? 'bg-white border-primary'
+                        : 'bg-white/60'
+                  }`}
+                >
+                  {/* MOBILE DOT (inside card) */}
+                  <div className="flex lg:hidden mb-3 justify-end">
+                    <div
+                      className={`absolute right-3 top-3 w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold border-2 transition-all duration-300 ${
+                        isPassed
+                          ? 'bg-primary text-white border-primary'
+                          : 'bg-white text-gray-400 border-gray-300'
+                      } ${isCurrent ? 'scale-110 shadow-lg' : ''}`}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{step.text}</p>
+                </div>
+
+                {/* DESKTOP DOT (UNCHANGED) */}
+                <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold border-2 transition-all duration-300 ${
                       isPassed
@@ -85,21 +112,6 @@ const HowOrderPage = () => {
                   >
                     {String(i + 1).padStart(2, '0')}
                   </div>
-                </div>
-
-                {/* CARD */}
-                <div
-                  className={`max-w-md w-full p-6 rounded-md border transition-all duration-300 ${
-                    isCurrent
-                      ? 'shadow-xl border-primary bg-white'
-                      : isPassed
-                        ? 'bg-white'
-                        : 'bg-white/60'
-                  }`}
-                >
-                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-
-                  <p className="text-gray-600 leading-relaxed">{step.text}</p>
                 </div>
               </div>
             );
@@ -116,13 +128,13 @@ const HowOrderPage = () => {
         <div className="flex justify-center gap-3 flex-wrap">
           <Link
             href={Pages.contacts}
-            className="px-6 py-3 border border-black hover:bg-black hover:text-white transition"
+            className="w-full sm:w-auto text-center border text-black px-5 py-3 hover:bg-neutral-200 transition"
           >
-            Связаться
+            Наши контакты
           </Link>
 
           <button
-            className="px-6 py-3 bg-primary text-white hover:opacity-90 transition"
+            className="px-6 py-3 bg-primary text-white hover:opacity-90 transition cursor-pointer"
             onClick={() => openModal(OrderForm, { onClose: closeModal })}
           >
             Оставить заявку

@@ -1,8 +1,8 @@
 enum Pages {
   home = '/',
-  installmentCredit = 'installmentCredit',
-  contacts = 'contacts',
-  howOrder = 'howOrder',
+  installmentCredit = '/installmentCredit',
+  contacts = '/contacts',
+  howOrder = '/howOrder',
 }
 
 interface IPage {
