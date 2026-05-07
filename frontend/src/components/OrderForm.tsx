@@ -1,7 +1,5 @@
 'use client';
 
-import Api from '_api/index';
-import { Collection } from '_api/types';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import UploadZone from './UploadZone';
@@ -35,25 +33,26 @@ const OrderForm = ({ title, onClose }: OrderFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    let imageResult = null;
+    const formData = new FormData();
 
-    // 1. upload
     if (file) {
-      imageResult = await Api.uploadFile(file);
+      formData.append('file', file);
     }
 
-    // 2. формируем payload ЗДЕСЬ
-    const payload = [
-      {
-        ...form,
-        image: imageResult,
-      },
-    ];
+    formData.append(
+      'data',
+      JSON.stringify([
+        {
+          ...form,
+        },
+      ])
+    );
 
-    // 3. отправляем
-    await Api.postData(Collection.Orders, payload);
+    await fetch('/api/orders', {
+      method: 'POST',
+      body: formData,
+    });
 
-    // 4. очищаем
     setForm({
       name: '',
       phone: '',
@@ -66,6 +65,7 @@ const OrderForm = ({ title, onClose }: OrderFormProps) => {
     setFile(null);
     onClose();
   };
+
   return (
     <div
       className="bg-white w-full max-w-lg p-6 relative"
