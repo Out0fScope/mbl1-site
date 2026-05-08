@@ -9,7 +9,7 @@ const CTAButton = () => {
 
   return (
     <button
-      className="btn-7  max-xl:text-sm"
+      className="btn-7 max-xl:text-sm"
       onClick={() => openModal(OrderForm, { onClose: closeModal })}
     >
       <div className="arrow-layer">

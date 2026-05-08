@@ -27,7 +27,7 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 flex h-full items-center px-4 sm:px-6 md:px-16 lg:px-32">
-        <div className="max-w-xl md:max-w-2xl">
+        <div className="max-w-xl md:max-w-2xl rounded-lg p-4 bg-amber-50/30 backdrop-blur-xs">
           {/* Title */}
           <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold leading-tight mb-4 md:mb-6 text-foreground">
             Мебель на заказ в Минске

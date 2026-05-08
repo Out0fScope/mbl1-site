@@ -53,12 +53,18 @@ const AboutSection = () => {
           </div>
 
           {/* CTA */}
-          <div className="mt-10">
+
+          <div className="relative z-10 flex justify-start">
             <Link
               href={Pages.contacts}
-              className="w-full sm:w-auto text-center border text-black px-5 py-3 hover:bg-neutral-200 transition"
+              className="group relative block px-4 py-2 text-center
+                     border border-primary text-primary hover:text-white
+                     overflow-hidden transition-all duration-300"
             >
-              Связаться с нами
+              <span className="relative z-10">Связаться с нами</span>
+
+              {/* hover fill */}
+              <span className="absolute inset-0 w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>
             </Link>
           </div>
         </div>
