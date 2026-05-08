@@ -1,48 +1,134 @@
-const reviews = [
-  {
-    name: 'Анна Смирнова',
-    text: 'Очень довольна качеством. Диван выглядит даже лучше, чем на фото, и невероятно удобный.',
-  },
-  {
-    name: 'Игорь Волков',
-    text: 'Заказывали стол и стулья — всё пришло идеально. Видно внимание к деталям.',
-  },
-  {
-    name: 'Мария Кузнецова',
-    text: 'Минималистичный дизайн и отличные материалы. Интерьер сразу стал выглядеть дороже.',
-  },
-];
+'use client';
 
-const ReviewsSection = () => {
+import { IReview } from '_api/types';
+import { HomeSections } from '_types/navigation';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+
+const url = process.env.NEXT_PUBLIC_CLIENT_API_URL;
+
+interface Props {
+  reviews: IReview[];
+}
+
+const ReviewsSection = ({ reviews }: Props) => {
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToIndex = (index: number) => {
+    const el = sliderRef.current;
+    if (!el) return;
+
+    const child = el.children[index] as HTMLElement;
+    if (!child) return;
+
+    child.scrollIntoView({
+      behavior: 'smooth',
+      inline: 'center',
+      block: 'nearest',
+    });
+
+    setActiveIndex(index);
+  };
+
+  const handleScroll = () => {
+    const el = sliderRef.current;
+    if (!el) return;
+
+    const index = Math.round(el.scrollLeft / el.clientWidth);
+    setActiveIndex(index);
+  };
+
+  useEffect(() => {
+    const el = sliderRef.current;
+    if (!el) return;
+
+    el.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => el.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const prev = () => {
+    if (activeIndex > 0) {
+      scrollToIndex(activeIndex - 1);
+    }
+  };
+
+  const next = () => {
+    if (activeIndex < reviews.length - 1) {
+      scrollToIndex(activeIndex + 1);
+    }
+  };
+
   return (
     <section
-      id="reviews"
-      className="cursor-default mb-16 scroll-mt-32 px-4 sm:px-12 lg:px-16 xl:px-24"
+      id={HomeSections.reviews}
+      className="mb-16 scroll-mt-32 px-4 sm:px-12 lg:px-16 xl:px-24"
     >
-      <div className="h-full flex justify-between flex-col">
-        {/* Header */}
-        <header className="py-2 md:py-4">
-          <h2 className="text-lg uppercase tracking-widest text-foreground">Отзывы</h2>
-        </header>
+      {/* HEADER */}
+      <header className="py-2 md:py-4">
+        <h2 className="text-lg uppercase tracking-widest text-foreground">Отзывы</h2>
+      </header>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {reviews.map((review, index) => (
-            <div key={index} className="bg-white p-6 border hover:shadow-md transition">
-              {/* Text */}
-              <p className="text-neutral-700 leading-relaxed mb-6">“{review.text}”</p>
+      <div className="relative">
+        {/* LEFT */}
+        <button
+          onClick={prev}
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white shadow-md p-2 rounded-full"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
 
-              {/* User */}
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-neutral-200 flex items-center justify-center text-sm font-medium text-neutral-600">
-                  {review.name.charAt(0)}
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-neutral-900">{review.name}</p>
-                  <p className="text-xs text-neutral-500">Покупатель</p>
+        {/* RIGHT */}
+        <button
+          onClick={next}
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white shadow-md p-2 rounded-full"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+
+        {/* TRACK */}
+        <div
+          ref={sliderRef}
+          className="flex gap-6 overflow-hidden scroll-smooth snap-x snap-mandatory no-scrollbar"
+        >
+          {reviews.map((item, index) => {
+            const isActive = index === activeIndex;
+
+            return (
+              <div
+                key={index}
+                onClick={() => scrollToIndex(index)}
+                className="min-w-full sm:min-w-[70%] md:min-w-[40%] lg:min-w-[25%] snap-center"
+              >
+                <div
+                  className={`relative w-full aspect-[4/5] border bg-white shadow-sm transition-all duration-500
+                    ${isActive ? 'scale-100 opacity-100' : 'scale-90 opacity-60'}
+                  `}
+                >
+                  <Image
+                    src={`${url}/assets/${item.image?.id}`}
+                    alt={`Отзыв ${index + 1}`}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
-            </div>
+            );
+          })}
+        </div>
+
+        {/* DOTS */}
+        <div className="flex justify-center gap-2 mt-5">
+          {reviews.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollToIndex(index)}
+              className={`w-2.5 h-2.5 rounded-full transition ${
+                activeIndex === index ? 'bg-primary scale-125' : 'bg-gray-300'
+              }`}
+            />
           ))}
         </div>
       </div>

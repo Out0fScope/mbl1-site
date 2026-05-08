@@ -2,12 +2,14 @@ enum Collection {
   Contacts = 'contacts',
   Categories = 'categories',
   Orders = 'orders',
+  Reviews = 'reviews',
 }
 
 interface ICollectionMap {
   [Collection.Contacts]: IContacts[];
   [Collection.Categories]: ICategory[];
   [Collection.Orders]: IOrder[];
+  [Collection.Reviews]: IReview[];
 }
 
 interface IContacts {
@@ -40,6 +42,10 @@ interface IOrder {
   designer: boolean;
 }
 
+interface IReview {
+  image: { id: string };
+}
+
 interface IData {
   getData<K extends Collection>(key: K): Promise<ICollectionMap[K]>;
   postData<K extends Collection>(key: K, value: ICollectionMap[K]): Promise<void>;
@@ -47,4 +53,4 @@ interface IData {
 }
 
 export { Collection };
-export type { ICategory, ICollectionMap, IContacts, IData, IOrder, IProject };
+export type { ICategory, ICollectionMap, IContacts, IData, IOrder, IProject, IReview };
