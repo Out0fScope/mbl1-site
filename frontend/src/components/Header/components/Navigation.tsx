@@ -28,7 +28,7 @@ const Navigation = ({ categories }: NavigationProps) => {
   return (
     <nav className="hidden md:flex items-center max-xl:text-sm lg:gap-2">
       {links.map((item, index) => (
-        <NavItem key={index} page={item} categories={categories} />
+        <NavItem key={index} page={item} />
       ))}
     </nav>
   );

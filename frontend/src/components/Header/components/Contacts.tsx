@@ -1,7 +1,6 @@
 'use client';
 
 import { IContacts } from '_api/types';
-import useScroll from '_hooks/useScroll';
 import InstagramIcon from '_icons/instagram.svg';
 import { Mail } from 'lucide-react';
 import Image from 'next/image';
@@ -9,19 +8,16 @@ import CTAButton from './CTAButton';
 
 interface Props {
   contacts: IContacts;
+  isCompact: boolean;
 }
 
-const Contacts = ({ contacts }: Props) => {
-  const { scrollY } = useScroll();
-
-  const isCompact = scrollY > 100;
-
+const Contacts = ({ contacts, isCompact }: Props) => {
   return (
     <div className="hidden md:flex h-full">
       <div
         id="socials"
-        className={`flex transition-all duration-300 py-2 ${
-          isCompact ? 'flex-row items-center' : 'flex-col gap-2'
+        className={`flex transition-all duration-300 ${
+          isCompact ? 'flex-row items-center' : 'flex-col gap-1'
         }`}
       >
         {/* Contacts */}

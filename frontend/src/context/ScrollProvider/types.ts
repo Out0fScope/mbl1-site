@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 
 interface IScrollContext {
   scrollY: number;
+  isUpDirection: boolean;
+  width: number;
 }
 
 interface IScrollProviderProps {

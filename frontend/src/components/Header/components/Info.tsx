@@ -1,22 +1,18 @@
 'use client';
 
 import { IContacts } from '_api/types';
-import useScroll from '_hooks/useScroll';
 import { Clock4, MapPin, Phone } from 'lucide-react';
 
 interface Props {
   contacts: IContacts;
+  isCompact: boolean;
 }
 
-const Info = ({ contacts }: Props) => {
-  const { scrollY } = useScroll();
-
-  const isCompact = scrollY > 100;
-
+const Info = ({ contacts, isCompact }: Props) => {
   return (
     <div
-      className={`hidden md:flex transition-all duration-300 py-2 ${
-        isCompact ? 'flex-row items-center' : 'flex-col items-end gap-2'
+      className={`hidden md:flex transition-all duration-300 ${
+        isCompact ? 'flex-row items-center' : 'flex-col items-end gap-1'
       }`}
     >
       {/* Address */}
