@@ -1,11 +1,16 @@
 'use client';
 
+import { IContacts } from '_api/types';
 import NavigationMenu from '_components/NavigationMenu';
 import NavigationHelper from '_helpers/navigation-helper';
 import useModal from '_hooks/useModal';
 import { Menu } from 'lucide-react';
 
-const BurgerButton = () => {
+interface Props {
+  contacts: IContacts;
+}
+
+const BurgerButton = ({ contacts }: Props) => {
   const { openModal, closeModal } = useModal();
   const pages = NavigationHelper.getPages().filter((page) => !page.hidden);
 
@@ -16,7 +21,11 @@ const BurgerButton = () => {
   return (
     <button
       onClick={() =>
-        openModal(NavigationMenu, { navigationItems: navigationItems, onClose: closeModal })
+        openModal(NavigationMenu, {
+          navigationItems: navigationItems,
+          contacts: contacts,
+          onClose: closeModal,
+        })
       }
       aria-label="Открыть меню навигации"
       className="md:hidden text-foreground"

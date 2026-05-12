@@ -9,16 +9,18 @@ import CTAButton from './CTAButton';
 interface Props {
   contacts: IContacts;
   isCompact: boolean;
+  forceVisible?: boolean;
 }
 
-const Contacts = ({ contacts, isCompact }: Props) => {
+const Contacts = ({ contacts, isCompact, forceVisible }: Props) => {
+  const isMobile = window.innerWidth < 768;
+
   return (
-    <div className="hidden md:flex h-full">
+    <div className={`${isMobile ? 'hidden' : ''}`}>
       <div
-        id="socials"
-        className={`flex transition-all duration-300 ${
+        className={`md:flex transition-all duration-300 ${
           isCompact ? 'flex-row items-center' : 'flex-col gap-1'
-        }`}
+        } ${forceVisible ? 'flex' : 'hidden'}`}
       >
         {/* Contacts */}
         <div

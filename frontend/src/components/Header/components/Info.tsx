@@ -6,14 +6,15 @@ import { Clock4, MapPin, Phone } from 'lucide-react';
 interface Props {
   contacts: IContacts;
   isCompact: boolean;
+  forceVisible?: boolean;
 }
 
-const Info = ({ contacts, isCompact }: Props) => {
+const Info = ({ contacts, isCompact, forceVisible }: Props) => {
   return (
     <div
-      className={`hidden md:flex transition-all duration-300 ${
+      className={`md:flex transition-all duration-300 ${
         isCompact ? 'flex-row items-center' : 'flex-col items-end gap-1'
-      }`}
+      } ${forceVisible ? 'flex' : 'hidden'}`}
     >
       {/* Address */}
       <div className="w-full flex items-center gap-2">

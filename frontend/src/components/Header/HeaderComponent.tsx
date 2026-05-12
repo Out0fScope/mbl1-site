@@ -40,7 +40,7 @@ const HeaderComponent = ({ contacts, categories }: HeaderProps) => {
 
             <Logo isCompact={isCompact} />
 
-            <BurgerButton />
+            <BurgerButton contacts={contacts} />
 
             <Contacts contacts={contacts} isCompact={isCompact} />
           </motion.div>
