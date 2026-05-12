@@ -1,6 +1,7 @@
 'use client';
 
 import { IContacts } from '_api/types';
+import { useMediaQuery } from '_hooks/useMatchMedia';
 import useModal from '_hooks/useModal';
 import { X } from 'lucide-react';
 import Contacts from './Header/components/Contacts';
@@ -21,6 +22,7 @@ const NavigationMenu = ({
   onClose: () => void;
 }) => {
   const { openModal, closeModal } = useModal();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   return (
     <div

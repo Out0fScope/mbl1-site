@@ -1,6 +1,7 @@
 'use client';
 
 import { IContacts } from '_api/types';
+import { useMediaQuery } from '_hooks/useMatchMedia';
 import InstagramIcon from '_icons/instagram.svg';
 import { Mail } from 'lucide-react';
 import Image from 'next/image';
@@ -13,10 +14,9 @@ interface Props {
 }
 
 const Contacts = ({ contacts, isCompact, forceVisible }: Props) => {
-  const isMobile = window.innerWidth < 768;
-
+  const isMobile = useMediaQuery('(max-width: 768px)');
   return (
-    <div className={`${isMobile ? 'hidden' : ''}`}>
+    <div className={`${isMobile && !forceVisible ? 'hidden' : ''}`}>
       <div
         className={`md:flex transition-all duration-300 ${
           isCompact ? 'flex-row items-center' : 'flex-col gap-1'
