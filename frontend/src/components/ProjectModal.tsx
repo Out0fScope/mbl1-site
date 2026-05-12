@@ -15,9 +15,7 @@ const url = process.env.NEXT_PUBLIC_CLIENT_API_URL;
 
 const ProjectModal = ({ project, onClose }: Props) => {
   const [active, setActive] = useState(0);
-
   const images = project.images || [];
-
   const { openModal, closeModal } = useModal();
 
   const prev = () => {
@@ -79,18 +77,35 @@ const ProjectModal = ({ project, onClose }: Props) => {
           lg:h-auto
         "
       >
-        {images.length > 0 && (
-          <img
-            src={`${url}/assets/${images[active]?.directus_files_id.id}`}
-            alt={project.title}
-            className="
+        {images.length > 0 &&
+          (images[active]?.directus_files_id.type.includes('image') ? (
+            <img
+              src={`${url}/assets/${images[active]?.directus_files_id.id}`}
+              alt={project.title}
+              className="
               h-full
               w-full
               object-contain
               select-none
             "
-          />
-        )}
+            />
+          ) : (
+            <video
+              src={`${url}/assets/${images[active]?.directus_files_id.id}`}
+              controls
+              muted
+              playsInline
+              autoPlay
+              preload="metadata"
+              className="
+    h-full
+    w-full
+    object-contain
+    select-none
+    bg-black
+  "
+            />
+          ))}
 
         {/* LEFT ARROW */}
         {active > 0 && (

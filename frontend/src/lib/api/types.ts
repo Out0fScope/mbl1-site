@@ -30,7 +30,7 @@ interface ICategory {
 interface IProject {
   title: string;
   description: string;
-  images: { directus_files_id: { id: string } }[];
+  images: { directus_files_id: { id: string; type: string } }[];
 }
 
 interface IOrder {
