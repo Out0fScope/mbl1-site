@@ -286,3 +286,17 @@ body {
     --color-c: var(--color-primary);
   }
 }
+
+.swiper-pagination {
+  margin-top: 20px;
+  position: relative !important;
+}
+
+.swiper-pagination-bullet {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}

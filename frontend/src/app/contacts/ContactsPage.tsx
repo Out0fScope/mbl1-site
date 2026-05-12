@@ -2,6 +2,7 @@
 
 import { IContacts } from '_api/types';
 import OrderForm from '_components/OrderForm';
+import { useScrollToTop } from '_hooks/useScrollToTop';
 import InstagramIcon from '_icons/instagram.svg';
 import { Mail, Phone } from 'lucide-react';
 import Image from 'next/image';
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const ContactsPage = ({ contacts }: Props) => {
+  useScrollToTop();
+
   return (
     <section className="mb-16 scroll-mt-64 px-4 sm:px-12 lg:px-16 xl:px-24">
       <header className="py-[1rem] md:py-[2rem]">

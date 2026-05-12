@@ -3,6 +3,7 @@
 import OrderForm from '_components/OrderForm';
 import { useActiveStep } from '_hooks/useActiveStep';
 import useModal from '_hooks/useModal';
+import { useScrollToTop } from '_hooks/useScrollToTop';
 import { HowOrderSections, Pages } from '_types/navigation';
 import Link from 'next/link';
 import { useRef } from 'react';
@@ -38,6 +39,7 @@ const HowOrderPage = () => {
   const { openModal, closeModal } = useModal();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const { active, progress } = useActiveStep(containerRef);
+  useScrollToTop();
 
   return (
     <section

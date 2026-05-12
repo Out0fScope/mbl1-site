@@ -1,3 +1,4 @@
+import aboutImage from '_images/about.png';
 import { HomeSections, Pages } from '_types/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,7 +9,7 @@ const AboutSection = () => {
       <div className="mx-auto flex flex-col md:grid md:grid-cols-2 gap-6 md:gap-8 items-start lg:items-center">
         {/* IMAGE (desktop only) */}
         <div className="relative w-full h-[280px] sm:h-[400px] lg:h-full min-h-[480px] hidden md:block">
-          <Image src="/team.jpg" alt="О нас" fill className="object-cover" />
+          <Image src={aboutImage} alt="О нас" fill className="object-cover" />
         </div>
         {/* CONTENT */}
         <div className="flex flex-col gap-6 md:gap-8 order-1 lg:order-none">
@@ -20,7 +21,7 @@ const AboutSection = () => {
 
           {/* IMAGE (mobile placed after h2) */}
           <div className="relative w-full h-[280px] sm:h-[400px] md:hidden">
-            <Image src="/team.jpg" alt="О нас" fill className="object-cover" />
+            <Image src={aboutImage} alt="О нас" fill className="object-cover" />
           </div>
 
           <p className="text-neutral-600 text-base md:text-lg leading-relaxed">

@@ -4,7 +4,15 @@ import { IReview } from '_api/types';
 import { HomeSections } from '_types/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
+
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const url = process.env.NEXT_PUBLIC_CLIENT_API_URL;
 
@@ -13,53 +21,7 @@ interface Props {
 }
 
 const ReviewsSection = ({ reviews }: Props) => {
-  const sliderRef = useRef<HTMLDivElement | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const scrollToIndex = (index: number) => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    const child = el.children[index] as HTMLElement;
-    if (!child) return;
-
-    child.scrollIntoView({
-      behavior: 'smooth',
-      inline: 'center',
-      block: 'nearest',
-    });
-
-    setActiveIndex(index);
-  };
-
-  const handleScroll = () => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    const index = Math.round(el.scrollLeft / el.clientWidth);
-    setActiveIndex(index);
-  };
-
-  useEffect(() => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    el.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => el.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const prev = () => {
-    if (activeIndex > 0) {
-      scrollToIndex(activeIndex - 1);
-    }
-  };
-
-  const next = () => {
-    if (activeIndex < reviews.length - 1) {
-      scrollToIndex(activeIndex + 1);
-    }
-  };
+  const swiperRef = useRef<SwiperType | null>(null);
 
   return (
     <section
@@ -74,37 +36,50 @@ const ReviewsSection = ({ reviews }: Props) => {
       <div className="relative">
         {/* LEFT */}
         <button
-          onClick={prev}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white shadow-md p-2 rounded-full"
+          onClick={() => swiperRef.current?.slidePrev()}
+          className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition hover:bg-white"
         >
-          <ChevronLeft className="w-5 h-5" />
+          <ChevronLeft className="h-5 w-5" />
         </button>
 
         {/* RIGHT */}
         <button
-          onClick={next}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white shadow-md p-2 rounded-full"
+          onClick={() => swiperRef.current?.slideNext()}
+          className="absolute right-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition hover:bg-white"
         >
-          <ChevronRight className="w-5 h-5" />
+          <ChevronRight className="h-5 w-5" />
         </button>
 
-        {/* TRACK */}
-        <div
-          ref={sliderRef}
-          className="flex gap-6 overflow-hidden scroll-smooth snap-x snap-mandatory no-scrollbar"
+        <Swiper
+          modules={[Navigation, Pagination]}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          centeredSlides
+          spaceBetween={24}
+          slidesPerView={1}
+          pagination={{
+            clickable: true,
+          }}
+          breakpoints={{
+            640: {
+              slidesPerView: 1.4,
+            },
+            768: {
+              slidesPerView: 2.2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          }}
+          className="!overflow-hidden"
         >
-          {reviews.map((item, index) => {
-            const isActive = index === activeIndex;
-
-            return (
-              <div
-                key={index}
-                onClick={() => scrollToIndex(index)}
-                className="min-w-full sm:min-w-[70%] md:min-w-[40%] lg:min-w-[25%] snap-center"
-              >
+          {reviews.map((item, index) => (
+            <SwiperSlide key={index}>
+              {({ isActive }) => (
                 <div
-                  className={`relative w-full aspect-[4/5] border bg-white shadow-sm transition-all duration-500
-                    ${isActive ? 'scale-100 opacity-100' : 'scale-90 opacity-60'}
+                  className={`relative h-[320px] md:h-[420px] lg:h-[460px] overflow-hidden border bg-white shadow-sm transition-all duration-500
+                    ${isActive ? 'scale-100 opacity-100' : 'scale-90 opacity-50'}
                   `}
                 >
                   <Image
@@ -114,23 +89,10 @@ const ReviewsSection = ({ reviews }: Props) => {
                     className="object-cover"
                   />
                 </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* DOTS */}
-        <div className="flex justify-center gap-2 mt-5">
-          {reviews.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollToIndex(index)}
-              className={`w-2.5 h-2.5 rounded-full transition ${
-                activeIndex === index ? 'bg-primary scale-125' : 'bg-gray-300'
-              }`}
-            />
+              )}
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </section>
   );
