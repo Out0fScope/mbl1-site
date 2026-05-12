@@ -2,6 +2,8 @@
 
 import OrderForm from '_components/OrderForm';
 import useModal from '_hooks/useModal';
+import { useScrollToTop } from '_hooks/useScrollToTop';
+import { Pages } from '_types/navigation';
 import { Banknote, CheckCircle, Clock, CreditCard, Percent } from 'lucide-react';
 
 const Card = ({ children }: { children: React.ReactNode }) => (
@@ -16,9 +18,13 @@ const IconBox = ({ children }: { children: React.ReactNode }) => (
 
 const InstallmentCreditPage = () => {
   const { openModal, closeModal } = useModal();
+  useScrollToTop();
 
   return (
-    <section className="mb-20 scroll-mt-64 px-4 sm:px-12 lg:px-16 xl:px-24">
+    <section
+      id={Pages.installmentCredit}
+      className="mb-20 scroll-mt-32 px-4 sm:px-12 lg:px-16 xl:px-24"
+    >
       {/* HEADER */}
       <header className="py-10">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">Рассрочка и кредит</h1>

@@ -7,13 +7,14 @@ import ReviewsSection from './sections/ReviewsSection';
 
 const Home = async () => {
   const categories = await Api.getData(Collection.Categories);
+  const reviews = await Api.getData(Collection.Reviews);
 
   return (
     <>
       <HeroSection />
       <GallerySection categories={categories} />
       <AboutSection />
-      <ReviewsSection />
+      <ReviewsSection reviews={reviews} />
     </>
   );
 };

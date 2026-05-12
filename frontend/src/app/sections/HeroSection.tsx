@@ -12,29 +12,26 @@ const HeroSection = () => {
   return (
     <section
       id={Pages.home}
-      className="relative h-screen w-full overflow-hidden mb-16 scroll-mt-32"
+      className="flex max-xl:justify-center relative h-screen w-full overflow-hidden mb-16 scroll-mt-32 text-foreground"
     >
       {/* Background */}
       <div className="absolute inset-0">
         <Image src="/hero.png" alt="Мебельный интерьер" fill priority className="object-cover" />
 
-        {/* overlay */}
-        {/* <div className="absolute inset-0 bg-white/10" /> */}
-
-        {/* bottom gradient */}
+        {/* Bottom gradient */}
         <div className="absolute inset-x-0 bottom-0 h-32 md:h-40 bg-gradient-to-b from-transparent to-white" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex h-full items-center px-4 sm:px-6 md:px-16 lg:px-32">
-        <div className="max-w-xl md:max-w-2xl rounded-lg p-4 bg-amber-50/30 backdrop-blur-xs">
+      <div className="relative z-10 flex w-full max-md:mt-20 md:items-center px-4 sm:px-6 md:px-16 lg:px-32 pt-10 lg:pt-16">
+        <div className="w-full max-w-2xl px-4 sm:px-6 md:px-8 py-4 md:py-6 bg-amber-50/30 backdrop-blur-sm">
           {/* Title */}
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold leading-tight mb-4 md:mb-6 text-foreground">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight mb-4 md:mb-6">
             Мебель на заказ в Минске
           </h1>
 
           {/* List */}
-          <ul className="space-y-2 md:space-y-3 mb-6 md:mb-8">
+          <ul className="space-y-1 md:space-y-2 mb-6 md:mb-8 pl-5">
             {[
               'Более 10 лет на мебельном рынке',
               'Рассрочка 0% до 6 месяцев за счет собственных средств',
@@ -44,7 +41,7 @@ const HeroSection = () => {
             ].map((text, i) => (
               <li
                 key={i}
-                className="font-medium text-sm sm:text-base md:text-xl text-foreground list-disc list-inside pl-5 marker:text-primary marker:text-lg md:marker:text-2xl"
+                className="font-medium text-sm sm:text-base md:text-xl text-foreground list-disc marker:text-primary marker:text-lg md:marker:text-2xl"
               >
                 {text}
               </li>

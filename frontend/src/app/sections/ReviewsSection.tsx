@@ -1,50 +1,98 @@
-const reviews = [
-  {
-    name: 'Анна Смирнова',
-    text: 'Очень довольна качеством. Диван выглядит даже лучше, чем на фото, и невероятно удобный.',
-  },
-  {
-    name: 'Игорь Волков',
-    text: 'Заказывали стол и стулья — всё пришло идеально. Видно внимание к деталям.',
-  },
-  {
-    name: 'Мария Кузнецова',
-    text: 'Минималистичный дизайн и отличные материалы. Интерьер сразу стал выглядеть дороже.',
-  },
-];
+'use client';
 
-const ReviewsSection = () => {
+import { IReview } from '_api/types';
+import { HomeSections } from '_types/navigation';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
+import { useRef } from 'react';
+
+import { Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+const url = process.env.NEXT_PUBLIC_CLIENT_API_URL;
+
+interface Props {
+  reviews: IReview[];
+}
+
+const ReviewsSection = ({ reviews }: Props) => {
+  const swiperRef = useRef<SwiperType | null>(null);
+
   return (
     <section
-      id="reviews"
-      className="cursor-default mb-16 scroll-mt-32 px-4 sm:px-12 lg:px-16 xl:px-24"
+      id={HomeSections.reviews}
+      className="mb-16 scroll-mt-32 px-4 sm:px-12 lg:px-16 xl:px-24"
     >
-      <div className="h-full flex justify-between flex-col">
-        {/* Header */}
-        <header className="py-2 md:py-4">
-          <h2 className="text-lg uppercase tracking-widest text-foreground">Отзывы</h2>
-        </header>
+      {/* HEADER */}
+      <header className="py-2 md:py-4">
+        <h2 className="text-lg uppercase tracking-widest text-foreground">Отзывы</h2>
+      </header>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {reviews.map((review, index) => (
-            <div key={index} className="bg-white p-6 border hover:shadow-md transition">
-              {/* Text */}
-              <p className="text-neutral-700 leading-relaxed mb-6">“{review.text}”</p>
+      <div className="relative">
+        {/* LEFT */}
+        <button
+          onClick={() => swiperRef.current?.slidePrev()}
+          className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition hover:bg-white"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
 
-              {/* User */}
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-neutral-200 flex items-center justify-center text-sm font-medium text-neutral-600">
-                  {review.name.charAt(0)}
+        {/* RIGHT */}
+        <button
+          onClick={() => swiperRef.current?.slideNext()}
+          className="absolute right-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/80 p-2 shadow-md transition hover:bg-white"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+
+        <Swiper
+          modules={[Navigation, Pagination]}
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+          }}
+          centeredSlides
+          spaceBetween={24}
+          slidesPerView={1}
+          pagination={{
+            clickable: true,
+          }}
+          breakpoints={{
+            640: {
+              slidesPerView: 1.4,
+            },
+            768: {
+              slidesPerView: 2.2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          }}
+          className="!overflow-hidden"
+        >
+          {reviews.map((item, index) => (
+            <SwiperSlide key={index}>
+              {({ isActive }) => (
+                <div
+                  className={`relative h-[320px] md:h-[420px] lg:h-[460px] overflow-hidden border bg-white shadow-sm transition-all duration-500
+                    ${isActive ? 'scale-100 opacity-100' : 'scale-90 opacity-50'}
+                  `}
+                >
+                  <Image
+                    src={`${url}/assets/${item.image?.id}`}
+                    alt={`Отзыв ${index + 1}`}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-neutral-900">{review.name}</p>
-                  <p className="text-xs text-neutral-500">Покупатель</p>
-                </div>
-              </div>
-            </div>
+              )}
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </section>
   );
