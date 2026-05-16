@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Contacts = ({ contacts, isCompact, forceVisible }: Props) => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isMobile = useMediaQuery('(max-width: 767px)');
   return (
     <div className={`${isMobile && !forceVisible ? 'hidden' : ''}`}>
       <div
