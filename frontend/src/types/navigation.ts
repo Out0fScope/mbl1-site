@@ -3,6 +3,7 @@ enum Pages {
   installmentCredit = '/installmentCredit',
   contacts = '/contacts',
   howOrder = '/howOrder',
+  privacy = '/privacy',
 }
 
 interface IPage {
@@ -52,6 +53,11 @@ const Nav = {
   [Pages.howOrder]: {
     name: 'Как заказать',
     link: '/how-order',
+  },
+  [Pages.privacy]: {
+    name: 'Политика конфиденциальности',
+    link: '/privacy',
+    hidden: true,
   },
 } as const;
 

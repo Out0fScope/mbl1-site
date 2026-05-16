@@ -25,7 +25,7 @@ const ContactsPage = ({ contacts }: Props) => {
         {/* ЛЕВЫЙ БЛОК */}
         <div className="flex flex-col gap-6 h-full">
           {/* контакты */}
-          <div className="bg-white border p-6 flex flex-col gap-6">
+          <div className="bg-white p-6 flex flex-col gap-6">
             <h2 className="text-xl font-semibold">Как с нами связаться</h2>
 
             {/* КОНТАКТЫ */}
@@ -66,7 +66,7 @@ const ContactsPage = ({ contacts }: Props) => {
         </div>
 
         {/* ПРАВЫЙ БЛОК */}
-        <div className="bg-white border p-6 flex items-center justify-center">
+        <div className="bg-white p-6 flex items-center justify-center">
           <OrderForm onClose={() => {}} />
         </div>
       </div>

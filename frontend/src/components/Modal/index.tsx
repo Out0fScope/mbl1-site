@@ -37,7 +37,7 @@ const Modal = ({ open, onClose, children }: IModalProps) => {
       {open && (
         <motion.div
           className="fixed inset-0 z-100 bg-gradient-to-b from-black/60 via-black/40 to-black/60 
-                     backdrop-blur-sm flex items-center overflow-auto justify-center p-4"
+                     backdrop-blur-sm flex justify-center overflow-hidden p-4"
           variants={backdropVariants}
           initial="hidden"
           animate="visible"

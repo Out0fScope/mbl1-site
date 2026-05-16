@@ -26,7 +26,7 @@ const NavigationMenu = ({
 
   return (
     <div
-      className="relative w-full max-w-md bg-background text-foreground p-8 shadow-xl mx-4 flex flex-col gap-8"
+      className="relative w-full max-w-md bg-background text-foreground p-8 shadow-xl mx-4 flex flex-col gap-8 overflow-auto"
       onClick={(e) => e.stopPropagation()}
     >
       {/* CLOSE */}

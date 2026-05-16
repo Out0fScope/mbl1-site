@@ -1,9 +1,9 @@
 'use client';
 
+import { createOrder, uploadFile } from '_helpers/client-fetch-helper';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import UploadZone from './UploadZone';
-import { createOrder, uploadFile } from '_helpers/client-fetch-helper';
 
 interface OrderFormProps {
   title?: string;
@@ -67,7 +67,7 @@ const OrderForm = ({ title, onClose }: OrderFormProps) => {
 
   return (
     <div
-      className="bg-white w-full max-w-lg p-6 relative"
+      className="relative w-full max-w-lg my-auto bg-background text-foreground p-8 shadow-xl mx-4 flex flex-col gap-8 overflow-auto"
       onClick={(e) => e.stopPropagation()} // чтобы клик не закрывал модалку
     >
       {/* ❌ кнопка закрытия */}
@@ -87,7 +87,7 @@ const OrderForm = ({ title, onClose }: OrderFormProps) => {
 
       <h2 className="text-xl mb-4 font-semibold">Оставьте заявку</h2>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 h-full">
         {/* Имя */}
         <input
           type="text"
@@ -141,7 +141,7 @@ const OrderForm = ({ title, onClose }: OrderFormProps) => {
         {/* Кнопка */}
         <button
           type="submit"
-          className="bg-black text-white py-2 hover:opacity-80 transition cursor-pointer"
+          className=" mt-auto bg-black text-white py-2 hover:opacity-80 transition cursor-pointer "
         >
           Отправить заявку
         </button>

@@ -1,3 +1,4 @@
+import { Pages } from '_types/navigation';
 import Link from 'next/link';
 import { IContacts } from 'src/lib/api/types';
 
@@ -7,7 +8,7 @@ const Info = ({ contacts }: { contacts: IContacts }) => {
       <span className="text-4xl font-bold">MeBeL1</span>
       <span className="text-muted text-sm mb-[0.5rem]">
         Отправляя формы на сайте, вы соглашаетесь на обработку персональных данных, защищенных{' '}
-        <Link href="#" className="underline text-muted/50 hover:text-primary">
+        <Link href={Pages.privacy} className="underline text-muted/50 hover:text-primary">
           политикой конфиденциальности
         </Link>
       </span>

@@ -13,7 +13,7 @@ const AboutSection = () => {
         </div>
         {/* CONTENT */}
         <div className="flex flex-col gap-6 md:gap-8 order-1 lg:order-none">
-          <h2 className="text-sm md:text-lg uppercase tracking-widest text-foreground">О нас</h2>
+          <h2 className="text-lg uppercase tracking-widest text-foreground">О нас</h2>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-neutral-900 leading-tight">
             Мы создаём мебель, которая становится частью вашей жизни
