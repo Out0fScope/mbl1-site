@@ -62,7 +62,7 @@ const AboutSection = () => {
             <Link
               href={Pages.contacts}
               className="group relative inline-block px-4 py-2 text-center
-                         border border-primary text-primary hover:text-white
+                         border border-black text-black hover:text-white hover:border-white
                          overflow-hidden transition-all duration-300"
             >
               <span className="relative z-10">Связаться с нами</span>

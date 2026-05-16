@@ -38,8 +38,8 @@ const ProjectModal = ({ project, onClose }: Props) => {
         shadow-2xl
 
         flex
-        flex-col
-        lg:flex-row
+  flex-col
+  sm:flex-row
 
         max-h-[95vh]
       "
@@ -64,18 +64,14 @@ const ProjectModal = ({ project, onClose }: Props) => {
       {/* LEFT */}
       <div
         className="
-          relative
-          flex
-          min-h-[320px]
-          flex-3
-          items-center
-          justify-center
-          bg-neutral-100
+    relative
+    flex
+    flex-3
 
-          h-[45vh]
-          sm:h-[55vh]
-          lg:h-auto
-        "
+    items-center
+    justify-center
+    bg-neutral-100
+  "
       >
         {images.length > 0 &&
           (images[active]?.directus_files_id.type.includes('image') ? (
@@ -83,11 +79,11 @@ const ProjectModal = ({ project, onClose }: Props) => {
               src={`${url}/assets/${images[active]?.directus_files_id.id}`}
               alt={project.article}
               className="
-              h-full
-              w-full
-              object-contain
-              select-none
-            "
+          h-full
+          w-full
+          object-contain
+          select-none
+        "
             />
           ) : (
             <video
@@ -98,12 +94,12 @@ const ProjectModal = ({ project, onClose }: Props) => {
               autoPlay
               preload="metadata"
               className="
-    h-full
-    w-full
-    object-contain
-    select-none
-    bg-black
-  "
+          h-full
+          w-full
+          object-contain
+          select-none
+          bg-black
+        "
             />
           ))}
 
@@ -112,18 +108,27 @@ const ProjectModal = ({ project, onClose }: Props) => {
           <button
             onClick={prev}
             className="
-              absolute left-3 top-1/2 z-20
-              -translate-y-1/2
+        absolute
+        left-3
+        top-1/2
+        z-20
 
-              rounded-full
-              bg-black/50
-              p-3
-              text-white
-              backdrop-blur
+        -translate-y-1/2
 
-              transition-all duration-200
-              hover:scale-110 hover:bg-black/70
-            "
+        rounded-full
+        bg-black/50
+
+        p-3
+
+        text-white
+        backdrop-blur
+
+        transition-all
+        duration-200
+
+        hover:scale-110
+        hover:bg-black/70
+      "
           >
             <ChevronLeft size={22} />
           </button>
@@ -134,18 +139,27 @@ const ProjectModal = ({ project, onClose }: Props) => {
           <button
             onClick={next}
             className="
-              absolute right-3 top-1/2 z-20
-              -translate-y-1/2
+        absolute
+        right-3
+        top-1/2
+        z-20
 
-              rounded-full
-              bg-black/50
-              p-3
-              text-white
-              backdrop-blur
+        -translate-y-1/2
 
-              transition-all duration-200
-              hover:scale-110 hover:bg-black/70
-            "
+        rounded-full
+        bg-black/50
+
+        p-3
+
+        text-white
+        backdrop-blur
+
+        transition-all
+        duration-200
+
+        hover:scale-110
+        hover:bg-black/70
+      "
           >
             <ChevronRight size={22} />
           </button>
