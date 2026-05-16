@@ -6,9 +6,9 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { useRef } from 'react';
 
+import type { Swiper as SwiperType } from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import type { Swiper as SwiperType } from 'swiper';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -63,13 +63,16 @@ const ReviewsSection = ({ reviews }: Props) => {
           }}
           breakpoints={{
             640: {
-              slidesPerView: 1.4,
+              slidesPerView: 1.8,
             },
             768: {
-              slidesPerView: 2.2,
+              slidesPerView: 2.4,
             },
             1024: {
-              slidesPerView: 3,
+              slidesPerView: 3.2,
+            },
+            1280: {
+              slidesPerView: 4,
             },
           }}
           className="!overflow-hidden"
@@ -78,7 +81,7 @@ const ReviewsSection = ({ reviews }: Props) => {
             <SwiperSlide key={index}>
               {({ isActive }) => (
                 <div
-                  className={`relative h-[320px] md:h-[420px] lg:h-[460px] overflow-hidden border bg-white shadow-sm transition-all duration-500
+                  className={`relative h-[360px] md:h-[420px] lg:h-[460px] overflow-hidden border bg-white shadow-sm transition-all duration-500
                     ${isActive ? 'scale-100 opacity-100' : 'scale-90 opacity-50'}
                   `}
                 >
