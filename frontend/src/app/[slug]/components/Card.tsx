@@ -29,7 +29,7 @@ const Card = ({ item }: CardProps) => {
       <div className="flex flex-col justify-between flex-1 p-4 bg-white">
         {/* TITLE */}
         <div>
-          <h3 className="font-semibold text-base sm:text-lg text-black mb-2">{item.title}</h3>
+          <h3 className="font-semibold text-base sm:text-lg text-black mb-2">{item.article}</h3>
 
           <p className="text-sm text-gray-600 line-clamp-2">{item.description}</p>
         </div>

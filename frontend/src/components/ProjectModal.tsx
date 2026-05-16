@@ -81,7 +81,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
           (images[active]?.directus_files_id.type.includes('image') ? (
             <img
               src={`${url}/assets/${images[active]?.directus_files_id.id}`}
-              alt={project.title}
+              alt={project.article}
               className="
               h-full
               w-full
@@ -171,7 +171,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
       >
         {/* CONTENT */}
         <div>
-          <h2 className="mb-4 text-2xl font-semibold leading-tight">{project.title}</h2>
+          <h2 className="mb-4 text-2xl font-semibold leading-tight">{project.article}</h2>
 
           <p
             className="
@@ -233,7 +233,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
           <button
             onClick={() =>
               openModal(OrderForm, {
-                title: project.title,
+                title: project.article,
                 onClose: closeModal,
               })
             }

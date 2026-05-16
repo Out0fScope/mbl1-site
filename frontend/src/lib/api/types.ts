@@ -28,7 +28,7 @@ interface ICategory {
 }
 
 interface IProject {
-  title: string;
+  article: string;
   description: string;
   images: { directus_files_id: { id: string; type: string } }[];
 }

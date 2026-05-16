@@ -22,8 +22,6 @@ export const uploadFile = async (file: File) => {
 };
 
 export const createOrder = async (payload: any) => {
-  console.log(payload);
-
   const res = await fetch(`${API_URL}/items/orders`, {
     method: 'POST',
     headers: {

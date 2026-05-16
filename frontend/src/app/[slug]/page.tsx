@@ -19,6 +19,10 @@ export async function generateStaticParams() {
 const Category = async ({ params }: CategoryProps) => {
   const { slug } = await params;
   const categories: ICategory[] = await Api.getData(Collection.Categories);
+  // const categories: ICategory[] = (await Api.getData(Collection.Categories)).map((x) => ({
+  //   ...x,
+  //   projects: [...x.projects].reverse(),
+  // }));
   const category = categories.find((t) => slugify(t.title, { lower: true }) === slug);
 
   if (!category) return;
