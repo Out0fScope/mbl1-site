@@ -247,7 +247,8 @@ const ProjectModal = ({ project, onClose }: Props) => {
           <button
             onClick={() =>
               openModal(OrderForm, {
-                title: project.article,
+                projectArticle: project.article,
+                projectUrl: `${window.location.origin}${window.location.pathname}?project=${project.article}`,
                 onClose: closeModal,
               })
             }
