@@ -10,7 +10,7 @@ const AnalyticsContext = createContext<IAnalyticsContext | null>(null);
 
 const loadGA = () => {
   if (!GA_ID) return;
-  if (window.gtag) return;
+  // if (window.gtag) return;
 
   const script = document.createElement('script');
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
@@ -19,16 +19,17 @@ const loadGA = () => {
   document.head.appendChild(script);
 
   script.onload = () => {
-    window.dataLayer = window.dataLayer || [];
+    console.log('GA script loaded');
+    // window.dataLayer = window.dataLayer || [];
 
-    function gtag(...args: any[]) {
-      window.dataLayer.push(args);
-    }
+    // function gtag(...args: any[]) {
+    //   window.dataLayer.push(args);
+    // }
 
-    window.gtag = gtag;
+    // window.gtag = gtag;
 
-    gtag('js', new Date());
-    gtag('config', GA_ID);
+    // gtag('js', new Date());
+    // gtag('config', GA_ID);
   };
 };
 
@@ -38,9 +39,10 @@ export const AnalyticsProvider = ({ children }: { children: React.ReactNode }) =
   // init from storage
   useEffect(() => {
     const saved = localStorage.getItem(COOKIE_KEY) as ConsentState;
+    const func = async (saved: ConsentState) => setConsentState(saved);
 
     if (saved) {
-      setConsentState(saved);
+      func(saved);
 
       if (saved === 'accepted') {
         loadGA();
