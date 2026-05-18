@@ -10,16 +10,13 @@ export const initAnalytics = () => {
   document.head.appendChild(script);
 
   script.onload = () => {
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag(...args: any[]) {
-      window.dataLayer.push(args);
-    }
-
-    // @ts-ignore
-    window.gtag = gtag;
-
-    gtag('js', new Date());
-    gtag('config', GA_ID);
+    // window.dataLayer = window.dataLayer || [];
+    // function gtag(...args: any[]) {
+    //   window.dataLayer.push(args);
+    // }
+    // // @ts-ignore
+    // window.gtag = gtag;
+    // gtag('js', new Date());
+    // gtag('config', GA_ID);
   };
 };
