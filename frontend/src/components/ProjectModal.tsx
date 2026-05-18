@@ -2,7 +2,6 @@
 
 import useModal from '_hooks/useModal';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { IProject } from 'src/lib/api/types';
 import OrderForm from './OrderForm';
@@ -18,8 +17,6 @@ const ProjectModal = ({ project, onClose }: Props) => {
   const [active, setActive] = useState(0);
   const images = project.images || [];
   const { openModal, closeModal } = useModal();
-  const router = useRouter();
-  const searchParams = useSearchParams();
 
   const prev = () => {
     setActive((prev) => Math.max(prev - 1, 0));
@@ -27,18 +24,6 @@ const ProjectModal = ({ project, onClose }: Props) => {
 
   const next = () => {
     setActive((prev) => Math.min(prev + 1, images.length - 1));
-  };
-
-  const handleClose = () => {
-    const params = new URLSearchParams(searchParams);
-
-    params.delete('project');
-
-    router.push(`?${params.toString()}`, {
-      scroll: false,
-    });
-
-    closeModal();
   };
 
   return (
@@ -61,7 +46,7 @@ const ProjectModal = ({ project, onClose }: Props) => {
     >
       {/* CLOSE */}
       <button
-        onClick={handleClose}
+        onClick={onClose}
         className="
           absolute right-4 top-4 z-30
           rounded-full
@@ -262,8 +247,9 @@ const ProjectModal = ({ project, onClose }: Props) => {
           <button
             onClick={() =>
               openModal(OrderForm, {
-                title: project.article,
-                onClose: handleClose,
+                projectArticle: project.article,
+                projectUrl: `${window.location.origin}${window.location.pathname}?project=${project.article}`,
+                onClose: closeModal,
               })
             }
             className="

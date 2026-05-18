@@ -6,16 +6,19 @@ import { useState } from 'react';
 import UploadZone from './UploadZone';
 
 interface OrderFormProps {
-  title?: string;
+  projectArticle?: string;
+  projectUrl?: string;
   onClose: () => void;
 }
 
-const OrderForm = ({ title, onClose }: OrderFormProps) => {
+const OrderForm = ({ projectArticle, projectUrl, onClose }: OrderFormProps) => {
   const [form, setForm] = useState({
     name: '',
     phone: '',
     email: '',
-    description: title ? 'Ориентировочный проект: ' + title : '',
+    description: '',
+    projectArticle: projectArticle || '',
+    projectUrl: projectUrl || '',
     image: null,
     designer: false,
   });
@@ -54,6 +57,8 @@ const OrderForm = ({ title, onClose }: OrderFormProps) => {
         phone: '',
         email: '',
         description: '',
+        projectArticle: '',
+        projectUrl: '',
         image: null,
         designer: false,
       });

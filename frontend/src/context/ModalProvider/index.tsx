@@ -14,11 +14,26 @@ const ModalProvider = ({ children }: IModalProviderProps) => {
   } | null>(null);
 
   const openModal = (component: ComponentType<any>, props?: any) => {
+    // if (props?.project) {
+    //   const params = new URLSearchParams(searchParams);
+    //   params.set('project', props.project.article);
+    //   router.push(`?${params.toString()}`, {
+    //     scroll: false,
+    //   });
+    // }
+
     setModalConfig({ component, props });
     setIsOpen(true);
   };
 
   const closeModal = () => {
+    // const params = new URLSearchParams(searchParams);
+    // params.delete('project');
+    // router.push(`?${params.toString()}`, {
+    //   scroll: false,
+    // });
+
+    modalConfig?.props?.onClose?.();
     setIsOpen(false);
     setModalConfig(null);
   };

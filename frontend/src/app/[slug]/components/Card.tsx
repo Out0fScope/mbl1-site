@@ -1,7 +1,5 @@
 'use client';
 
-import ProjectModal from '_components/ProjectModal';
-import useModal from '_hooks/useModal';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { IProject } from 'src/lib/api/types';
 
@@ -12,11 +10,10 @@ interface CardProps {
 }
 
 const Card = ({ item }: CardProps) => {
-  const { openModal, closeModal } = useModal();
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const openProject = () => {
+  const handleOpen = () => {
     const params = new URLSearchParams(searchParams);
 
     params.set('project', item.article);
@@ -27,34 +24,36 @@ const Card = ({ item }: CardProps) => {
   };
 
   return (
-    <div className="flex flex-col overflow-hidden shadow-lg h-full">
-      {/* IMAGE AREA */}
-      <div className="relative h-56 sm:h-64 bg-black/30">
+    <div className="flex h-full flex-col overflow-hidden shadow-lg">
+      <div className="relative h-56 bg-black/30 sm:h-64">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${url}/assets/${item.images[0]?.directus_files_id.id}?access_token=GbOjzxPfosOPItS_v28R-DYNyFR5kBN7)`,
+            backgroundImage: `url(${url}/assets/${item.images[0]?.directus_files_id.id})`,
           }}
         />
       </div>
 
-      {/* BOTTOM SHELF */}
-      <div className="flex flex-col justify-between flex-1 p-4 bg-white">
-        {/* TITLE */}
+      <div className="flex flex-1 flex-col justify-between bg-white p-4">
         <div>
-          <h3 className="font-semibold text-base sm:text-lg text-black mb-2">{item.article}</h3>
+          <h3 className="mb-2 text-base font-semibold text-black sm:text-lg">{item.article}</h3>
 
-          <p className="text-sm text-gray-600 line-clamp-2">{item.description}</p>
+          <p className="line-clamp-2 text-sm text-gray-600">{item.description}</p>
         </div>
 
-        {/* ACTION */}
         <div className="mt-4 flex justify-end">
           <button
-            onClick={() => {
-              openProject();
-              openModal(ProjectModal, { project: item, onClose: closeModal });
-            }}
-            className="border px-4 py-2 text-sm text-black transition-colors duration-200 hover:bg-black hover:text-white cursor-pointer"
+            onClick={handleOpen}
+            className="
+              cursor-pointer
+              border
+              px-4
+              py-2
+              text-sm
+              text-black
+              transition-colors duration-200
+              hover:bg-black hover:text-white
+            "
           >
             Подробнее
           </button>

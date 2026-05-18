@@ -1,5 +1,9 @@
 'use client';
 
+import ProjectModal from '_components/ProjectModal';
+import useModal from '_hooks/useModal';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { ICategory } from 'src/lib/api/types';
 import Card from './components/Card';
 
@@ -8,6 +12,34 @@ interface CategoryPageProps {
 }
 
 const CategoryPage = ({ category }: CategoryPageProps) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { openModal, closeModal } = useModal();
+
+  const article = searchParams.get('project');
+  const activeProject = category.projects.find((p) => p.article === article);
+
+  useEffect(() => {
+    if (!activeProject) {
+      closeModal();
+
+      return;
+    }
+
+    openModal(ProjectModal, {
+      project: activeProject,
+      onClose: () => {
+        const params = new URLSearchParams(searchParams);
+
+        params.delete('project');
+
+        router.push(`?${params.toString()}`, {
+          scroll: false,
+        });
+      },
+    });
+  }, [activeProject]);
+
   return (
     <section className="mb-16 scroll-mt-64 px-4 sm:px-12 lg:px-16 xl:px-24">
       {/* HEADER */}
