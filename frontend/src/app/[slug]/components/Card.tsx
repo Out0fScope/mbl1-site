@@ -2,7 +2,6 @@
 
 import ProjectModal from '_components/ProjectModal';
 import useModal from '_hooks/useModal';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { IProject } from 'src/lib/api/types';
 
 const url = process.env.NEXT_PUBLIC_CLIENT_API_URL;
@@ -13,18 +12,6 @@ interface CardProps {
 
 const Card = ({ item }: CardProps) => {
   const { openModal, closeModal } = useModal();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const openProject = () => {
-    const params = new URLSearchParams(searchParams);
-
-    params.set('project', item.article);
-
-    router.push(`?${params.toString()}`, {
-      scroll: false,
-    });
-  };
 
   return (
     <div className="flex flex-col overflow-hidden shadow-lg h-full">
@@ -50,10 +37,7 @@ const Card = ({ item }: CardProps) => {
         {/* ACTION */}
         <div className="mt-4 flex justify-end">
           <button
-            onClick={() => {
-              openProject();
-              openModal(ProjectModal, { project: item, onClose: closeModal });
-            }}
+            onClick={() => openModal(ProjectModal, { project: item, onClose: closeModal })}
             className="border px-4 py-2 text-sm text-black transition-colors duration-200 hover:bg-black hover:text-white cursor-pointer"
           >
             Подробнее
